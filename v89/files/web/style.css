@@ -1,0 +1,1492 @@
+/* ---------- fonts ---------- */
+@font-face { font-family: "QalamMajeed"; src: url("../fonts/qalam_majeed.ttf"); font-display: block; }
+@font-face { font-family: "Muhammadi"; src: url("../fonts/muhammadi.ttf"); font-display: swap; }
+@font-face { font-family: "MeQuran"; src: url("../fonts/me_quran.ttf"); font-display: swap; }
+/* KFGQPC Hafs draws the ayah numbers only (no longer an Arabic text choice) */
+@font-face { font-family: "KfgqpcHafs"; src: url("../fonts/hafs.ttf"); font-display: swap; }
+@font-face { font-family: "AdobeArabic"; src: url("../fonts/adobe_arabic.otf"); font-display: swap; }
+@font-face { font-family: "NotoGuj"; src: url("../fonts/NotoSansGujarati.ttf"); font-display: block; }
+@font-face { font-family: "BalooBhai"; src: url("../fonts/BalooBhai2-Regular.ttf"); font-display: swap; }
+@font-face { font-family: "HindVadodara"; src: url("../fonts/HindVadodara-Regular.ttf"); font-display: swap; }
+@font-face { font-family: "Shruti"; src: url("../fonts/shruti.ttf"); font-display: swap; }
+
+/* ---------- theme ---------- */
+:root {
+  --bg: #F6F1E6;
+  --surface: #FFFDF8;
+  --surface-2: #FAF4E6;
+  --ink: #1C2826;
+  --ink-ar: #0D2622;
+  --muted: #6B7672;
+  --line: #E8DEC8;
+  --primary: #0A4D44;
+  --primary-2: #06352F;
+  --accent: #0F7363;
+  --gold: #B8892B;
+  --gold-2: #D9B25C;
+  --gold-soft: #F3E7C8;
+  --playing: #FFF4D6;
+  --playing-line: #E6C46F;
+  --hero-1: #0E5C51;
+  --shadow: 0 1px 2px rgba(40, 30, 10, .05), 0 8px 22px rgba(40, 30, 10, .07);
+  --fs-ar: 32px;
+  --fs-gu: 20px;
+  --fs-tr: 20px;
+  --ar-font: "QalamMajeed";
+  --gu-font: "NotoGuj";
+  --ui-font: "GuUI", "NotoGuj", system-ui, "Roboto", sans-serif;
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  color-scheme: light;
+}
+:root[data-theme="dark"] {
+  --bg: #0B1312;
+  --surface: #121D1B;
+  --surface-2: #172422;
+  --ink: #E3ECE9;
+  --ink-ar: #F4ECD6;
+  --muted: #8EA19C;
+  --line: #22322F;
+  --primary: #1C8A78;
+  --primary-2: #0A2824;
+  --accent: #4CC3AD;
+  --gold: #D9B45E;
+  --gold-2: #E8C979;
+  --gold-soft: #2D2817;
+  --playing: #2A2614;
+  --playing-line: #8B7230;
+  --shadow: 0 1px 2px rgba(0, 0, 0, .35);
+  color-scheme: dark;
+}
+/* themes from the user's palettes (colour 01 – 05) */
+:root[data-theme="linen"] {
+  --bg: #F8F6F3; --surface: #FFFFFF; --surface-2: #F0EDE8; --ink: #332F2A; --ink-ar: #2A2622; --muted: #857E71; --line: #E6E3DD;
+  --primary: #585248; --primary-2: #332F2A; --hero-1: #585248; --accent: #585248;
+  --gold: #857E71; --gold-2: #CFCAC2; --gold-soft: #E6E3DD; --playing: #EEE9E1; --playing-line: #B2ABA0;
+}
+:root[data-theme="midnight"] {
+  --bg: #06141B; --surface: #11212D; --surface-2: #182A37; --ink: #CCD0CF; --ink-ar: #E8ECEB; --muted: #9BA8AB; --line: #253745;
+  --primary: #253745; --primary-2: #11212D; --hero-1: #4A5C6A; --accent: #9BA8AB;
+  --gold: #CCD0CF; --gold-2: #CCD0CF; --gold-soft: #1C2E3B; --playing: #1E3242; --playing-line: #4A5C6A;
+  --tr-dark: #9BA8AB; --shadow: 0 1px 2px rgba(0, 0, 0, .4); color-scheme: dark;
+}
+/* Sky (the user's "Небо" palette): dark green → #04202E, highlighted ayah and the page behind lists #98D5EE, list cards #E1F2FA */
+:root[data-theme="sky"] {
+  --bg: #ECF7FC; --surface: #FFFFFF; /* page (B1): #98D5EE lightened 50%, 40%, 40% — the same as the menus (J1); surah and ayah boxes white */ --surface-2: #E5F4FB; --ink: #04202E; --ink-ar: #04202E; --muted: #0F5E83; --line: #A9D9EE;
+  --primary: #04202E; --primary-2: #0A3C55; --hero-1: #04202E; /* hero boxes: the same two colours as the heading */ --accent: #1786B4;
+  --gold: #0F5E83; --gold-2: #4FB3DA; --gold-soft: #E5F4FB; --playing: #EDF8FD; --playing-line: #4FB3DA; /* highlight: #98D5EE made 70% lighter, then 30%, then 20% more */
+  --shadow: 0 1px 2px rgba(4, 32, 46, .06), 0 8px 22px rgba(4, 32, 46, .10);
+}
+/* Sky: Settings and What's New 50% lighter than the rest */
+:root[data-theme="sky"] body:has(#view > .s-group) { --bg: #ECF7FC; --surface: #F5FBFE; --surface-2: #E5F4FB; --gold-soft: #E5F4FB; }
+/* Settings: the darker boxes inside the cards (fonts, previews, buttons) white */
+:root[data-theme="sky"] body:has(#view > .s-group) { --surface-2: #FFFFFF; --gold-soft: #FFFFFF; }
+/* Blue: every menu that opens from below (Create Backup, What's New, Report...): 40% lighter, white inside */
+:root[data-theme="sky"] #sheet { --bg: #ECF7FC; --surface: #FFFFFF; --surface-2: #FFFFFF; --gold-soft: #FFFFFF; background: var(--bg); }
+/* Blue: the ayah Play button in the heading's two colours */
+:root[data-theme="sky"] .ayah-top .mini[data-act="play"], :root[data-theme="sky"] .ayah-top .mini[data-act="play"]:active { background: linear-gradient(135deg, var(--primary), var(--primary-2)); }
+.theme-grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 6px; }
+.theme-card { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 2px 6px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface-2); font-size: 11.5px; }
+.theme-card .sw { width: 38px; height: 38px; border-radius: 50%; box-shadow: inset 0 0 0 1px rgba(0,0,0,.08); }
+.theme-card.on { border-color: var(--accent); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent); font-weight: 700; }
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--ui-font);
+  font-size: 15px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+input { font: inherit; color: inherit; }
+svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+[hidden] { display: none !important; }
+
+/* ---------- app bar ---------- */
+.bar {
+  position: sticky; top: 0; z-index: 20;
+  display: flex; align-items: center; gap: 4px;
+  min-height: 60px; padding: 8px 6px 8px 12px;
+  color: #fff;
+  /* the user's "Background patten.png" (pattern.png: faint gold; 5 repeats across, so it tiles side by side) */
+  background: url("pattern.png") 0 0 / 380px auto repeat, linear-gradient(135deg, var(--primary), var(--primary-2));
+  box-shadow: 0 2px 12px rgba(0,0,0,.18);
+}
+.bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold-2), transparent); opacity: .75; }
+.bar-titles { flex: 1; min-width: 0; padding-left: 2px; }
+.bar-title { font-size: 15.5px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-sub { font-size: 10.5px; opacity: .8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.bar-sub:empty { display: none; }
+.icon-btn { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+.icon-btn:active { background: rgba(255,255,255,.15); }
+.bar-actions { display: flex; }
+.bar-aa { font-weight: 700; font-size: 16px; letter-spacing: -.5px; }
+
+/* ---------- layout ---------- */
+#view { padding: 14px 14px calc(134px + var(--safe-b)); max-width: 820px; margin: 0 auto; min-height: calc(100vh - 60px); }
+body.has-player #view { padding-bottom: calc(176px + var(--safe-b)); }
+body.no-tabs.has-player #view { padding-bottom: calc(110px + var(--safe-b)); }
+body.no-tabs #view { padding-bottom: calc(30px + var(--safe-b)); }
+.fade-in { animation: fade .2s ease-out; }
+@keyframes fade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: none; } }
+
+/* ---------- bottom tabs ---------- */
+.tabs {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 22;
+  display: flex; justify-content: space-around;
+  padding: 14px 6px calc(6px + var(--safe-b));
+  --tab-line: color-mix(in srgb, var(--line) 60%, var(--muted));
+  background: var(--surface); border-top: 1px solid var(--tab-line);
+}
+body.no-tabs .tabs { display: none; }
+.tabs a { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 0 3px; border-radius: 14px; color: var(--muted); font-size: 12px; transition: color .2s; }
+.tabs a.on { color: var(--primary); font-weight: 700; }
+:root[data-dark="1"] .tabs a.on { color: var(--accent); }
+/* style 2: a dip cut out of the top edge, with a dot in it, over the chosen tab: behind the dot is the page itself */
+@property --nx { syntax: "<length>"; inherits: false; initial-value: -200px; }
+.tabs {
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 84 20'%3E%3Cpath d='M0 0C17 0 23 17.6 42 17.6S67 0 84 0Z'/%3E%3C/svg%3E") var(--nx) 0 / 84px 20px no-repeat, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+}
+.tabs.nmove { transition: --nx .32s cubic-bezier(.4, 1.25, .5, 1); }
+.tab-notch { position: fixed; top: 0; left: 0; z-index: 23; width: 84px; height: 20px; pointer-events: none; color: var(--primary);
+  --tab-line: color-mix(in srgb, var(--line) 60%, var(--muted)); }
+.tab-notch.move { transition: transform .32s cubic-bezier(.4, 1.25, .5, 1); }
+body.no-tabs .tab-notch, body.fs .tab-notch { display: none; }
+.tab-notch svg { display: block; width: 84px; height: 20px; stroke: none; }
+/* the page colour, like the bottom of the user's "back to menu" fade above it */
+.tab-notch .nf { fill: var(--bg); }
+/* a band of the page colour along the whole top of the bar, from the bar's line up 27px (135% of the 20px notch;
+   the dip's fill in index.html goes up as far), so cards scrolling down stop above the bar from left to right.
+   --tab-top is set by placeNotch. */
+body::after {
+  content: ""; position: fixed; left: 0; right: 0; z-index: 21; pointer-events: none;
+  top: calc(var(--tab-top, 200vh) - 60px); height: 60px;
+  /* the user's "back to menu.png": clear at the top, fading into the page colour at the bar */
+  background: url("tab-fade.png") 0 0 / 100% 100% no-repeat;
+}
+/* dark: the same fade, from the dark page colour (the picture is light) */
+:root[data-dark="1"] body::after { background: linear-gradient(transparent 18%, var(--bg) 75%); }
+/* Blue: the fade over the bottom bar in the page's own blue, not the cream picture */
+:root[data-theme="sky"] body::after { background: linear-gradient(transparent 18%, var(--bg) 75%); }
+body.no-tabs::after, body.fs::after { display: none; }
+.tab-notch svg { overflow: visible; }
+.tab-notch .ns { fill: none; stroke: var(--tab-line); stroke-width: 1; }
+.tab-notch circle { fill: currentColor; }
+:root[data-dark="1"] .tab-notch { color: var(--accent); }
+
+/* ---------- home hero ---------- */
+.hero {
+  position: relative; overflow: hidden;
+  border-radius: 22px; padding: 20px 18px 18px; margin-bottom: 16px;
+  color: #fff;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(233, 196, 106, .28), transparent 42%),
+    url("pattern.png") center / 380px auto repeat,
+    linear-gradient(140deg, var(--hero-1) 0%, var(--primary-2) 100%);
+  box-shadow: 0 10px 28px rgba(6, 53, 47, .28);
+}
+/* Blue: the "Bookmark karvo che?" question 75% lighter than the page */
+:root[data-theme="sky"] #sheet:has(.bm-ask) { background: #F7FCFE; }
+/* Blue: the Noor-e-Quran logo on #04202E in place of the green one (app-icon-blue.png) */
+:root[data-theme="sky"] img[src="app-icon.png"] { content: url("app-icon-blue.png"); }
+/* Blue: no gold glow in the corner, so the box shows its own #04202E → #0A3C55 (the glow turned it greenish) */
+:root[data-theme="sky"] .hero { background: url("pattern.png") center / 380px auto repeat, linear-gradient(140deg, var(--hero-1) 0%, var(--primary-2) 100%); box-shadow: 0 10px 28px rgba(4, 32, 46, .28); }
+.hero .bism { font-family: "QalamMajeed", serif; font-size: 30px; line-height: 1.9; text-align: center; color: #E2C27A; direction: rtl; } /* gold, like the logo (was pale #F6E3B0) */
+.hero .hello { font-size: 13px; opacity: .8; margin-top: 4px; text-align: center; }
+/* half the old height: one slim line */
+.continue {
+  display: flex; align-items: center; gap: 8px;
+  margin-top: 8px; padding: 5px 10px 5px 6px; border-radius: 12px;
+  background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.16);
+  backdrop-filter: blur(4px);
+}
+.continue .ic { width: 24px; height: 24px; border-radius: 7px; display: grid; place-items: center; background: linear-gradient(135deg, #E9C46A, #B8892B); color: #3a2a06; flex: none; }
+.continue .ic svg { width: 14px; height: 14px; stroke-width: 2.2; }
+.continue .main { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 7px; white-space: nowrap; overflow: hidden; }
+.continue .k { font-size: 9.5px; opacity: .75; letter-spacing: .3px; flex: none; }
+.continue .v { font-size: 13.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; }
+.continue .chev { opacity: .7; width: 16px; height: 16px; }
+
+/* ---------- segmented control ---------- */
+.seg { display: flex; gap: 4px; padding: 4px; border-radius: 14px; background: var(--surface-2); border: 1px solid var(--line); }
+.seg button { flex: 1; padding: 8px 6px; border-radius: 10px; font-size: 14px; color: var(--muted); white-space: nowrap; }
+.seg button.on { background: var(--surface); color: var(--primary); font-weight: 600; box-shadow: 0 1px 4px rgba(0,0,0,.08); }
+:root[data-dark="1"] .seg button.on { color: var(--accent); background: var(--surface-2); }
+.home-seg { margin-bottom: 12px; position: sticky; top: 68px; z-index: 5; }
+
+/* ---------- surah / juz list ---------- */
+.list { display: flex; flex-direction: column; gap: 8px; }
+.row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 11px 12px; border-radius: 16px;
+  background: var(--surface); border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  content-visibility: auto; contain-intrinsic-size: 0 68px;
+}
+.row:active { transform: scale(.99); }
+.star {
+  position: relative; width: 42px; height: 42px; flex: none;
+  display: grid; place-items: center;
+  font-size: 13px; font-weight: 700; color: var(--primary);
+}
+:root[data-dark="1"] .star { color: var(--gold-2); }
+.star svg { position: absolute; inset: 0; width: 42px; height: 42px; stroke: var(--gold); stroke-width: 1.3; fill: var(--gold-soft); }
+.star b { position: relative; }
+.row .main { flex: 1; min-width: 0; }
+.row .t { font-size: 16px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.row .d { font-size: 12.5px; color: var(--muted); }
+.row .ar { font-family: "QalamMajeed", serif; font-size: 24px; color: var(--primary); direction: rtl; flex: none; line-height: 1.5; }
+:root[data-dark="1"] .row .ar { color: var(--gold-2); }
+.row .ar.sm { font-size: 19px; max-width: 42%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dot { display: inline-block; width: 3px; height: 3px; border-radius: 50%; background: currentColor; vertical-align: middle; margin: 0 6px; opacity: .6; }
+.badge { display: inline-block; font-size: 11px; padding: 1px 7px; border-radius: 99px; background: var(--gold-soft); color: var(--gold); font-weight: 600; vertical-align: 1px; }
+
+/* ---------- reader ---------- */
+.surah-head {
+  position: relative; text-align: center; padding: 18px 14px 16px; margin: 4px 0 14px;
+  border-radius: 20px; color: #fff; overflow: hidden;
+  /* the gold side lines were taken off; the pattern is the user's "Background patten.png" */
+  background: url("pattern.png") center / 380px auto repeat, linear-gradient(140deg, var(--hero-1), var(--primary-2));
+  box-shadow: 0 8px 22px rgba(6, 53, 47, .22);
+}
+.surah-head .ar { font-family: "QalamMajeed", serif; font-size: 34px; line-height: 1.6; color: #E2C27A; } /* gold, like the Home Bismillah */
+.surah-head .gu { font-size: 18px; font-weight: 600; color: #E2C27A; }
+.surah-head .meta { font-size: 12.5px; opacity: .8; margin-top: 2px; }
+.bismillah {
+  text-align: center; direction: rtl; font-family: var(--ar-font), "QalamMajeed", serif;
+  font-size: calc(var(--fs-ar) * .95); line-height: 2; color: var(--ink-ar); margin: 4px 0 12px;
+}
+.bismillah .orn { color: var(--gold); font-size: .6em; vertical-align: middle; padding: 0 8px; }
+
+.intro {
+  border-radius: 16px; background: var(--surface); border: 1px solid var(--line); margin-bottom: 14px; overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.intro summary {
+  list-style: none; display: flex; align-items: center; gap: 10px; padding: 12px 14px; font-weight: 600; color: var(--primary); cursor: pointer;
+}
+:root[data-dark="1"] .intro summary { color: var(--gold-2); }
+.intro summary::-webkit-details-marker { display: none; }
+.intro summary .chev { margin-left: auto; transition: transform .2s; }
+.intro[open] summary .chev { transform: rotate(90deg); }
+.intro .body { padding: 0 16px 14px; font-family: var(--gu-font), "NotoGuj"; font-size: var(--fs-gu); line-height: 1.85; white-space: pre-line; }
+.intro .body .ar { font-family: var(--ar-font), "QalamMajeed"; direction: rtl; text-align: right; font-size: var(--fs-ar); line-height: 2; color: var(--ink-ar); white-space: normal; margin: 6px 0; }
+
+.ayah {
+  position: relative; padding: 12px 14px 14px; margin-bottom: 10px; border-radius: 18px;
+  background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow);
+  transition: background .25s, border-color .25s;
+  scroll-margin-top: 80px;
+}
+.ayah.playing { background: var(--playing); border-color: var(--playing-line); box-shadow: 0 0 0 3px color-mix(in srgb, var(--playing-line) 35%, transparent), var(--shadow); }
+.ayah.flash { animation: flash 1.6s ease-out; }
+@keyframes flash { 0%, 40% { background: var(--gold-soft); } 100% { background: var(--surface); } }
+.ayah-top { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
+.ayah-no {
+  font-size: 12px; font-weight: 700; color: var(--primary); padding: 3px 10px; border-radius: 99px;
+  background: color-mix(in srgb, var(--primary) 9%, transparent);
+}
+:root[data-dark="1"] .ayah-no { color: var(--gold-2); background: rgba(233,196,106,.1); }
+.ayah-top .sp { flex: 1; }
+.ayah-top .mini { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; color: var(--muted); }
+.ayah-top .mini:active { background: var(--surface-2); }
+.ayah-top .mini svg { width: 20px; height: 17px; }
+.ayah-top .mini.on { color: var(--gold); }
+.ayah-top .mini.on svg { fill: currentColor; }
+/* sajda ayahs */
+.ayah.sajda-wajib { border: 2px solid #C0453A; background: color-mix(in srgb, #C0453A 5%, var(--surface)); }
+.ayah.sajda-mustahab { border: 2px solid var(--gold-2); background: color-mix(in srgb, var(--gold-2) 7%, var(--surface)); }
+.sajda-banner { display: flex; flex-direction: column; gap: 1px; margin: -12px -14px 10px; padding: 9px 14px; border-radius: 16px 16px 0 0; color: #fff; }
+.sajda-banner b { font-size: 14.5px; letter-spacing: .2px; }
+.sajda-banner span { font-size: 12px; opacity: .9; }
+.sajda-banner.wajib { background: linear-gradient(135deg, #C0453A, #8E2A22); }
+.sajda-banner.mustahab { background: linear-gradient(135deg, #C9A24A, #9A7425); }
+.sj-pill { font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 99px; color: #fff; }
+.sj-pill.wajib { background: #C0453A; }
+.sj-pill.mustahab { background: #B8892B; }
+.row.row-wajib { border-color: #C0453A; }
+/* ♡ Favorite on each surah: tap to keep it in Home › Favorite */
+/* under the surah number, so the name, the Arabic and the download button keep their room */
+.row .lead { flex: none; display: flex; flex-direction: column; align-items: center; gap: 0; margin: -4px 0; }
+.fav-b { flex: none; width: 28px; height: 24px; margin: -2px 0 -6px; padding: 0; border: 0; background: transparent; color: var(--muted); display: grid; place-items: center; border-radius: 50%; }
+.fav-b svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.7; }
+@media (max-width: 360px) { .row .ar { font-size: 20px; } }
+.fav-b.on { color: #D2475A; }
+.fav-b.on svg { fill: currentColor; }
+.fav-empty svg { fill: none; }
+/* Mash'hur / Subject: only those ayahs, then a link to the whole surah */
+.only-head { text-align: center; margin: 2px 0 12px; }
+.only-head .ar { font-family: var(--ar-font), "QalamMajeed"; font-size: 26px; color: var(--gold); direction: rtl; line-height: 1.8; }
+.only-head b { display: block; font-size: 17px; color: var(--primary); }
+.only-head small { color: var(--muted); font-size: 12.5px; }
+.only-more { display: block; text-align: center; margin: 14px 0 6px; padding: 11px; border-radius: 14px; border: 1px dashed var(--line); color: var(--primary); font-weight: 600; text-decoration: none; }
+
+/* quick show/hide toggles above the ayahs */
+/* one short row of icon chips, so the surah's start isn't taken up by them */
+.view-toggles { display: flex; gap: 5px; margin: 0 0 10px; }
+.vt { flex: 1 1 0; min-width: 0; display: flex; align-items: center; justify-content: center; gap: 4px; padding: 5px 4px; border-radius: 99px; font-size: 11.5px; white-space: nowrap; overflow: hidden; font-weight: 600; color: var(--muted); background: var(--surface); border: 1.2px solid var(--line); }
+.vt svg { width: 14px; height: 14px; flex: none; stroke-width: 2; }
+.vt i { font-style: normal; font-weight: 800; font-size: 12px; line-height: 1; }
+.vt.on { color: var(--accent); border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+/* grammar colours on the Arabic text */
+.view-toggles + .gc-legend { margin-top: -4px; }
+.gc-legend { display: flex; align-items: center; gap: 4px 12px; margin: 0 0 10px; padding: 5px 12px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line); font-size: 12.5px; font-weight: 700; white-space: nowrap; overflow: hidden; }
+.gc-legend span::before { content: ""; display: inline-block; width: 9px; height: 9px; border-radius: 50%; background: currentColor; margin-right: 4px; }
+.gc-legend small { margin-left: auto; font-size: 11.5px; font-weight: 400; color: var(--muted); }
+.gc-fel { color: #2b7bd0; }
+.gc-baab { color: #9b4dca; }
+.gc-rule { color: #e0561b; }
+/* a coloured word is its own little island: without this, Chrome drew the line after it wrongly when an
+   uncoloured word wrapped to the next line (9:11: الزَّکٰوةَ showed as ة and الدِّیۡنِ ؕ وَ twice) */
+.ar-text .gc-fel, .ar-text .gc-baab, .ar-text .gc-rule { unicode-bidi: isolate; }
+.ar-text [data-gi] { cursor: pointer; }
+.bismillah.playing { background: var(--playing); border-radius: 16px; box-shadow: 0 0 0 2px var(--playing-line); }
+
+.ar-text {
+  direction: rtl; text-align: right; font-family: var(--ar-font), "QalamMajeed", serif;
+  font-size: var(--fs-ar); line-height: 2.05; color: var(--ink-ar); word-spacing: 2px;
+  padding: 2px 0 6px;
+}
+.aya-end {
+  display: inline-grid; place-items: center; position: relative;
+  width: 1.5em; height: 1.5em; margin: 0 .2em; vertical-align: .05em;
+  font-family: "KfgqpcHafs", sans-serif; font-size: .62em; font-weight: 700; color: var(--gold); line-height: 1;
+}
+.aya-end::before {
+  content: ""; position: absolute; inset: -.18em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cg fill='none' stroke='%23B8892B' stroke-width='1.6'%3E%3Cpath d='M20 2l5 7.9 8.7-2.6-1.6 9L40 20l-7.9 3.7 1.6 9-8.7-2.6L20 38l-5-7.9-8.7 2.6 1.6-9L0 20l7.9-3.7-1.6-9 8.7 2.6z'/%3E%3Ccircle cx='20' cy='20' r='10.5'/%3E%3C/g%3E%3C/svg%3E") center/contain no-repeat;
+}
+.aya-end b { position: relative; font-size: 1.05em; font-weight: 700; }
+.tr-text { font-family: var(--gu-font), "NotoGuj", sans-serif; font-size: var(--fs-tr); line-height: 1.75; color: var(--accent); margin-top: 4px; }
+:root[data-dark="1"] .tr-text { color: var(--tr-dark, #7FD3C2); }
+.gu-text { font-family: var(--gu-font), "NotoGuj", sans-serif; font-size: var(--fs-gu); line-height: 1.8; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.hide-tr .tr-text, .hide-gu .gu-text { display: none; }
+.hide-gu .tr-text + .gu-text { border: 0; }
+
+.reader-nav { display: flex; gap: 10px; margin: 18px 0 6px; }
+.reader-nav a { flex: 1; text-align: center; padding: 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); font-weight: 600; color: var(--primary); }
+:root[data-dark="1"] .reader-nav a { color: var(--accent); }
+.juz-surah-label { display: flex; align-items: center; gap: 10px; margin: 20px 0 10px; color: var(--gold); font-weight: 600; font-size: 14px; }
+.juz-surah-label::before, .juz-surah-label::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-2)); }
+.juz-surah-label::after { transform: scaleX(-1); }
+
+/* ---------- player ---------- */
+.player {
+  position: fixed; left: 8px; right: 8px; z-index: 21;
+  bottom: calc(66px + var(--safe-b));
+  border-radius: 20px; padding: 8px 8px 8px 12px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--hero-1), var(--primary-2));
+  box-shadow: 0 10px 30px rgba(0,0,0,.28);
+  max-width: 804px; margin: 0 auto;
+}
+body.no-tabs .player { bottom: calc(10px + var(--safe-b)); }
+.pl-row { display: flex; align-items: center; gap: 4px; }
+.pl-info { flex: 1; min-width: 0; }
+.pl-info .t { font-size: 14px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pl-info .d { font-size: 11.5px; opacity: .78; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pl-btn { width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; flex: none; position: relative; }
+.pl-btn:active { background: rgba(255,255,255,.14); }
+.pl-btn svg { width: 21px; height: 21px; }
+.pl-main { width: 48px; height: 48px; background: linear-gradient(135deg, #F0D58C, #C49A3A); color: #2D2005; }
+.pl-main svg { fill: currentColor; stroke: none; width: 22px; height: 22px; }
+.pl-btn .tag { position: absolute; top: 3px; right: 1px; font-size: 9.5px; font-weight: 700; background: #E9C46A; color: #2D2005; border-radius: 99px; padding: 0 4px; line-height: 15px; }
+.pl-speed { font-size: 12.5px; font-weight: 700; width: auto; padding: 0 8px; border-radius: 99px; border: 1px solid rgba(255,255,255,.3); height: 30px; }
+.pl-progress { height: 3px; border-radius: 3px; background: rgba(255,255,255,.18); margin: 6px 4px 2px; overflow: hidden; }
+.pl-progress i { display: block; height: 100%; width: 0; background: #E9C46A; transition: width .25s linear; }
+
+/* ---------- cards / settings ---------- */
+.s-group { margin-bottom: 18px; }
+.s-title { font-size: 12.5px; font-weight: 700; color: var(--gold); letter-spacing: .4px; margin: 0 4px 8px; }
+.s-card { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; box-shadow: var(--shadow); overflow: hidden; }
+.s-row { display: flex; align-items: center; gap: 12px; padding: 13px 14px; }
+.s-row + .s-row { border-top: 1px solid var(--line); }
+.s-row .main { flex: 1; min-width: 0; }
+.s-row .t { font-weight: 600; }
+.s-row .d { font-size: 12.5px; color: var(--muted); }
+.switch { position: relative; width: 46px; height: 28px; flex: none; }
+.switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+.switch i { position: absolute; inset: 0; border-radius: 99px; background: var(--line); transition: .2s; }
+.switch i::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.25); transition: .2s; }
+.switch input:checked + i { background: var(--accent); }
+.switch input:checked + i::after { transform: translateX(18px); }
+/* Blue: a switch that is ON, and a chosen Speed / Repeat, in the heading's dark blue made 15% lighter */
+:root[data-theme="sky"] .switch input:checked + i { background: #29414D; }
+:root[data-theme="sky"] .chip.on { background: #29414D; border-color: #29414D; }
+
+.font-row { padding: 14px; }
+.font-row + .font-row { border-top: 1px solid var(--line); }
+.font-row .hd { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px; }
+.font-row .hd span { font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.font-row .ctl { display: flex; align-items: center; gap: 10px; }
+.font-row .ctl button { width: 40px; height: 34px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line); font-weight: 700; font-size: 13px; flex: none; }
+.font-row input[type=range] { flex: 1; accent-color: var(--accent); }
+.font-row .pv { margin-top: 10px; padding: 10px 12px; border-radius: 12px; background: var(--surface-2); }
+
+.font-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 12px; }
+.font-card {
+  min-width: 0; text-align: center; padding: 10px 6px 8px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface-2);
+}
+.font-card.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 18%, transparent); }
+.font-card .pv { direction: rtl; font-size: 20px; line-height: 2; color: var(--ink-ar); white-space: nowrap; overflow: hidden; }
+.font-card .pv.gu { direction: ltr; font-size: 18px; line-height: 1.6; color: var(--ink); }
+.font-card .nm { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.font-card.on .nm { color: var(--accent); font-weight: 700; }
+.font-src { font-size: 11.5px; color: var(--muted); padding: 10px 14px 0; font-weight: 600; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { padding: 7px 14px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface-2); font-size: 14px; min-width: 46px; text-align: center; }
+.chip.on { background: var(--primary); border-color: var(--primary); color: #fff; font-weight: 600; }
+:root[data-dark="1"] .chip.on { background: var(--accent); border-color: var(--accent); color: #062420; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; padding: 10px 16px; border-radius: 12px; background: var(--primary); color: #fff; font-weight: 600; }
+.btn.ghost { background: var(--surface-2); color: var(--primary); border: 1px solid var(--line); }
+:root[data-dark="1"] .btn.ghost { color: var(--accent); }
+.btn.block { width: 100%; }
+
+/* ---------- search ---------- */
+.search-box { display: flex; align-items: center; gap: 8px; padding: 4px 6px 4px 14px; border-radius: 16px; background: var(--surface); border: 1.5px solid var(--line); box-shadow: var(--shadow); margin-bottom: 12px; }
+.search-box:focus-within { border-color: var(--accent); }
+.search-box input { flex: 1; border: 0; outline: 0; background: none; padding: 10px 0; font-size: 16px; font-family: var(--ui-font); min-width: 0; }
+.search-box svg { color: var(--muted); flex: none; }
+.hint { color: var(--muted); font-size: 13.5px; text-align: center; padding: 24px 12px; }
+.res { display: block; padding: 12px 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); margin-bottom: 8px; box-shadow: var(--shadow); }
+.res .hd { font-size: 12.5px; font-weight: 700; color: var(--gold); margin-bottom: 3px; }
+.res .tx { font-family: var(--gu-font), "NotoGuj"; font-size: 15px; line-height: 1.7; }
+.res mark { background: var(--gold-soft); color: inherit; border-radius: 4px; padding: 0 2px; }
+.res .tr-snip { font-family: var(--gu-font), "NotoGuj"; font-size: 14px; color: var(--accent); line-height: 1.6; }
+.clamp2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.wsugg { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; }
+.wchip { display: flex; flex-direction: column; align-items: center; padding: 4px 12px 6px; border-radius: 14px; background: var(--surface); border: 1.5px solid var(--line); box-shadow: var(--shadow); }
+.wchip .wa { font-family: var(--ar-font), "QalamMajeed"; font-size: 22px; line-height: 1.7; color: var(--ink-ar); }
+.wchip .wl { font-size: 11.5px; color: var(--muted); }
+.wchip.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.res .ar-snip { direction: rtl; font-family: var(--ar-font), "QalamMajeed"; font-size: 22px; line-height: 1.9; color: var(--ink-ar); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* go to ayah */
+.goto { display: flex; gap: 8px; align-items: stretch; }
+.gbox { flex: 1; min-width: 0; display: flex; flex-direction: column; padding: 4px 10px 2px; border-radius: 12px; background: var(--surface); border: 1.5px solid var(--line); box-shadow: var(--shadow); }
+.gbox:focus-within { border-color: var(--accent); }
+.gbox span { font-size: 10.5px; font-weight: 700; color: var(--gold); letter-spacing: .3px; }
+.gbox input { border: 0; outline: 0; background: none; font-size: 17px; font-weight: 600; padding: 0; width: 100%; -moz-appearance: textfield; }
+.gbox input::placeholder { color: var(--muted); opacity: .45; font-weight: 400; }
+.gbox input:disabled { opacity: .5; }
+.gbox input::-webkit-outer-spin-button, .gbox input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.gbtn { width: 46px; border-radius: 12px; background: linear-gradient(135deg, var(--accent), var(--primary)); color: #fff; display: grid; place-items: center; flex: none; }
+.goto-name { font-size: 13px; color: var(--muted); margin: 8px 4px 0; min-height: 17px; }
+.goto-name.ok { color: var(--ink); }
+.ar-inline { font-family: "QalamMajeed"; font-size: 17px; color: var(--primary); }
+
+/* ---------- bookmarks ---------- */
+.tab-pick { display: flex; flex-direction: column; gap: 8px; }
+.tp { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; background: var(--surface); border: 1.5px solid var(--line); text-align: left; }
+.tp .box { width: 24px; height: 24px; border-radius: 7px; border: 2px solid var(--c); display: grid; place-items: center; color: #fff; flex: none; }
+.tp .box svg { width: 16px; height: 16px; stroke-width: 3; }
+.tp.on { border-color: var(--c); background: color-mix(in srgb, var(--c) 8%, var(--surface)); }
+.tp.on .box { background: var(--c); }
+.tp .nm { flex: 1; font-weight: 600; font-size: 15.5px; }
+.tp .cnt { font-size: 12.5px; color: var(--muted); }
+.tp.add { border-style: dashed; color: var(--accent); }
+.tp.add svg { width: 22px; height: 22px; }
+.chip.add { display: inline-flex; align-items: center; gap: 4px; border-style: dashed; color: var(--accent); white-space: nowrap; }
+.chip.add svg { width: 16px; height: 16px; }
+.filter-row .chip { white-space: nowrap; flex: none; }
+.tab-tools { display: flex; gap: 16px; margin: -2px 4px 12px; }
+.tab-tools button { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; color: var(--muted); }
+.tab-tools svg { width: 16px; height: 16px; }
+.tabname { font-weight: 700; font-size: 11px; margin-left: 4px; }
+.bm-name { font-size: 16px; font-weight: 700; margin-bottom: 2px; }
+.bm-when { display: flex; align-items: center; gap: 4px; margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line); font-size: 11.5px; color: var(--muted); }
+.bm-when svg { width: 13px; height: 13px; }
+.bm-acts { display: flex; flex-direction: column; flex: none; }
+input.note-input { font-size: 16px; }
+.bm { display: flex; gap: 10px; align-items: flex-start; }
+.bm .stripe { width: 5px; align-self: stretch; border-radius: 4px; flex: none; }
+.bm .main { flex: 1; min-width: 0; }
+.bm .del { color: var(--muted); width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; flex: none; }
+.bm .note { font-size: 13px; color: var(--muted); margin-top: 4px; font-style: italic; }
+.filter-row { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 10px; scrollbar-width: none; }
+.filter-row::-webkit-scrollbar { display: none; }
+.cdot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; vertical-align: 0; }
+.empty { text-align: center; padding: 50px 20px; color: var(--muted); }
+.empty svg { width: 54px; height: 54px; color: var(--gold); opacity: .7; margin-bottom: 10px; stroke-width: 1.3; }
+
+/* ---------- start of a sipara ---------- */
+.juz-mark { display: flex; align-items: center; gap: 12px; margin: 18px 0 10px; padding: 10px 14px; border-radius: 16px; color: #fff;
+  background: linear-gradient(135deg, var(--hero-1), var(--primary-2)); box-shadow: 0 6px 16px rgba(6, 53, 47, .2); border: 1px solid var(--gold-2); }
+.juz-mark .jm-n { width: 38px; height: 38px; flex: none; display: grid; place-items: center; font-weight: 800; font-size: 16px; color: #3a2a06;
+  background: linear-gradient(135deg, #F6E3B0, #C49A3A); clip-path: polygon(50% 0, 63% 13%, 82% 9%, 87% 28%, 100% 40%, 91% 57%, 100% 75%, 82% 82%, 76% 100%, 59% 92%, 41% 100%, 26% 86%, 6% 84%, 9% 64%, 0 45%, 13% 31%, 13% 11%, 33% 12%); }
+.juz-mark div { display: flex; flex-direction: column; }
+.juz-mark b { font-size: 14.5px; }
+.juz-mark bdi { font-family: "QalamMajeed"; font-size: 18px; line-height: 1.6; color: #F6E3B0; direction: rtl; text-align: left; }
+
+/* ---------- Mushaf page marks ---------- */
+.page-mark { display: flex; align-items: center; gap: 10px; margin: 14px 2px 10px; color: var(--gold); }
+.page-mark::before, .page-mark::after { content: ""; flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-2)); }
+.page-mark::after { transform: scaleX(-1); }
+.page-mark span { font-size: 12px; font-weight: 700; letter-spacing: .4px; padding: 3px 12px; border-radius: 99px; border: 1px solid var(--gold-2); background: var(--primary); color: #E9C46A; }
+
+/* ---------- bismillah inside ayah 1 ---------- */
+.ayah-bism { direction: rtl; text-align: center; font-family: var(--ar-font), "QalamMajeed"; font-size: calc(var(--fs-ar) * .9); line-height: 2; color: var(--gold); padding-bottom: 4px; margin-bottom: 4px; border-bottom: 1px dashed var(--line); }
+
+/* ---------- tafseer / word-by-word ---------- */
+.ayah-tools { display: flex; justify-content: flex-start; gap: 6px; margin-top: 8px; }
+.ayah-tools button { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 99px; font-size: 12px; font-weight: 600; color: var(--accent); background: var(--surface-2); border: 1px solid var(--line); }
+.ayah-tools svg { width: 14px; height: 14px; }
+.ayah-tools button { white-space: nowrap; }
+.ayah-tools button.on { color: #fff; background: var(--accent); border-color: var(--accent); }
+.tafs-body { margin-top: 12px; font-family: var(--gu-font), "NotoGuj"; font-size: var(--fs-gu); line-height: 1.85; }
+.tafs-body p { margin: 0 0 12px; }
+.tafs-body .ar-p { direction: rtl; text-align: right; font-family: "QalamMajeed"; font-size: calc(var(--fs-gu) + 2px); line-height: 2; }
+.mt-note { font-size: 11.5px; color: var(--muted); text-align: right; margin-top: 4px; }
+.pack-card { padding: 14px; border-radius: 16px; background: var(--surface); border: 1.5px dashed var(--accent); margin-top: 12px; }
+.pack-card .t { font-weight: 700; }
+.pack-card .d { font-size: 13px; color: var(--muted); margin: 4px 0 10px; }
+.wbw-grid { direction: rtl; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.wbw { direction: ltr; text-align: center; padding: 8px 4px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+.wbw .wa { direction: rtl; font-family: var(--ar-font), "QalamMajeed"; font-size: 24px; line-height: 1.8; color: var(--ink-ar); }
+.wbw .wg { font-family: var(--gu-font), "NotoGuj"; font-size: 14.5px; font-weight: 600; color: var(--accent); min-height: 1.2em; }
+.wbw .we { font-size: 11px; color: var(--muted); }
+button.wbw { font: inherit; color: inherit; width: 100%; }
+button.wbw:active { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+
+/* ---------- auto scroll ---------- */
+/* the three reader buttons (Aa, audio, auto scroll): white icon in a white ring */
+/* the four reader buttons (Aa, audio, auto scroll, sleep): cream icon in a fine cream ring */
+.bar-actions { gap: 4px; padding-right: 2px; }
+.bar-actions .icon-btn { width: 32px; height: 32px; border: 1.4px solid #D9B25C; color: #F6F1E6; } /* gold in every theme */
+.bar-actions .icon-btn svg { width: 17px; height: 17px; stroke-width: 1.6; }
+.bar-actions .bar-aa { font-size: 13px; }
+/* five icons in the reader: a little smaller on narrow phones so the surah name and page still show */
+@media (max-width: 360px) {
+  .bar-actions { gap: 2px; }
+  .bar-actions .icon-btn { width: 28px; height: 28px; }
+  .bar-actions .icon-btn svg { width: 15px; height: 15px; }
+}
+.chev3 { fill: #F6F1E6; stroke: none; }
+.bar-actions .icon-btn.on { background: #F6F1E6; color: var(--primary); }
+.bar-actions .icon-btn.on .chev3 { fill: var(--primary); }
+.bar-actions .icon-btn.timer { width: auto; min-width: 33px; padding: 0 7px; border-radius: 99px; }
+.bar-actions .tm { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: .2px; }
+.custom-time { display: flex; align-items: center; gap: 8px; }
+.custom-time label { display: flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+.custom-time input { width: 52px; border: 0; outline: 0; background: none; font-size: 18px; font-weight: 600; text-align: center; -moz-appearance: textfield; }
+.custom-time input::-webkit-outer-spin-button, .custom-time input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.custom-time span { font-size: 12px; color: var(--muted); }
+.custom-time .btn { margin-left: auto; }
+/* close button on every bottom sheet */
+.sheet-x { position: sticky; top: 0; float: right; z-index: 2; width: 34px; height: 34px; margin: -4px -6px 0 8px; border-radius: 50%;
+  display: grid; place-items: center; background: var(--surface-2); border: 1px solid var(--line); color: var(--muted); }
+.sheet-x svg { width: 18px; height: 18px; }
+.as-panel {
+  position: fixed; left: 8px; right: 8px; z-index: 23; bottom: calc(10px + var(--safe-b));
+  max-width: 804px; margin: 0 auto; display: flex; align-items: center; gap: 6px;
+  padding: 8px 10px; border-radius: 18px; color: #fff;
+  background: linear-gradient(135deg, var(--hero-1), var(--primary-2)); box-shadow: 0 10px 28px rgba(0,0,0,.28);
+}
+body.has-player .as-panel { bottom: calc(150px + var(--safe-b)); }
+.as-panel input[type=range] { flex: 1; min-width: 0; accent-color: #E9C46A; }
+.as-b { width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center; flex: none; font-size: 20px; font-weight: 700; background: rgba(255,255,255,.12); }
+.as-b svg { width: 18px; height: 18px; }
+#asPlay svg { fill: currentColor; stroke: none; }
+.as-l { font-size: 11px; opacity: .8; }
+.as-v { font-size: 13px; min-width: 16px; text-align: center; color: #F6E3B0; }
+body.has-as #view { padding-bottom: calc(110px + var(--safe-b)); }
+
+/* ---------- full screen: the Quran text only ---------- */
+body.fs .bar, body.fs .tabs, body.fs .player, body.fs .ayah-top, body.fs .ayah-tools,
+body.fs .view-toggles, body.fs .gc-legend, body.fs .intro, body.fs .reader-nav,
+body.fs .page-mark, body.fs .juz-mark,
+body.fs-ar .tr-text, body.fs-ar .gu-text { display: none !important; }
+/* no boxes: one ayah straight under the other, like a page of the Mushaf */
+body.fs .ayah, body.fs .ayah.sajda-wajib, body.fs .ayah.sajda-mustahab {
+  background: transparent; border: 0; box-shadow: none; border-radius: 0; margin: 0; padding: 4px 2px 6px; animation: none; }
+/* the ayah being recited stands out as clearly as outside full screen */
+/* full screen: only the background colour, no box or border, and nothing moves */
+body.fs .ayah.playing { background: var(--playing); border-radius: 0; box-shadow: none; }
+/* a tap on the page in full screen: the Noor-e-Quran heading with search, a second tap hides it */
+#fsHead { display: none; }
+body.fs.fs-head #fsHead { display: flex !important; position: fixed; top: 0; left: 0; right: 0; z-index: 30; animation: fsHeadIn .2s ease-out; }
+body.fs.fs-head #juzBar { top: calc(var(--fs-head-h, 60px) + 8px); }
+#fsHeadPlay { background: #E9C46A; color: #06352F; border-color: #E9C46A; }
+#fsHeadPlay svg { fill: currentColor; stroke: none; }
+.pick-ayah { display: grid; gap: 8px; }
+.pick-ayah .btn { justify-content: center; }
+.pick-ayah .btn svg { width: 16px; height: 16px; fill: currentColor; stroke: none; }
+@keyframes fsHeadIn { from { transform: translateY(-100%); } to { transform: none; } }
+body.fs .sajda-banner { margin: 0 0 6px; border-radius: 10px; }
+body.fs #view { padding-top: calc(10px + env(safe-area-inset-top, 0px)); padding-bottom: calc(90px + var(--safe-b)); min-height: 100vh; }
+/* room under the last ayah, so the last ayahs of a surah also come to the top while they play */
+body.fs #view::after { content: ""; display: block; height: 70vh; }
+body.fs .as-panel { bottom: calc(68px + var(--safe-b)); right: 12px; }
+#fsCtl .fs-b {
+  position: fixed; z-index: 24; right: 12px; width: 46px; height: 46px; border-radius: 50%;
+  display: grid; place-items: center; color: #fff; background: rgba(6,53,47,.72);
+  border: 1px solid rgba(233,196,106,.6); box-shadow: 0 6px 18px rgba(0,0,0,.25);
+}
+/* all three at the bottom right, out of the text's way: exit · ગુ · scroll */
+#fsCtl .fs-exit { bottom: calc(12px + var(--safe-b)); right: 120px; opacity: .85; }
+#fsCtl .fs-scroll { bottom: calc(12px + var(--safe-b)); }
+#fsCtl .fs-gu { bottom: calc(12px + var(--safe-b)); right: 66px; opacity: .85; font-size: 17px; font-weight: 700; }
+#fsCtl .fs-gu.on { background: #E9C46A; color: #06352F; opacity: 1; }
+#fsCtl .fs-b svg { width: 22px; height: 22px; }
+#fsCtl .fs-scroll .chev3 { fill: #F6F1E6; }
+#fsCtl .fs-scroll.on { background: #E9C46A; }
+#fsCtl .fs-scroll.on .chev3 { fill: #06352F; }
+.na-p { font-size: 15.5px; line-height: 1.7; margin: 10px 0 16px; }
+/* download button beside each surah (Lite APK) */
+.dl-b { flex: none; margin-left: 6px; display: flex; flex-direction: column; align-items: center; gap: 3px; }
+.dl-b small { font-family: 'Noto Sans', sans-serif; font-size: 9.5px; line-height: 1.1; font-weight: 600; text-align: center; color: var(--muted); }
+.dl-c { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; position: relative;
+  color: var(--primary); background: var(--surface-2); border: 1px solid var(--line); box-sizing: border-box; }
+:root[data-dark="1"] .dl-c { color: var(--accent); }
+.dl-c svg { width: 19px; height: 19px; stroke-width: 2; }
+.dl-b.ok .dl-c { color: #fff; background: #2E8B57; border-color: #2E8B57; width: 34.2px; height: 34.2px; } /* saved: 5% smaller */
+.dl-b.ok .dl-c svg { width: 18px; height: 18px; }
+/* Blue: the downloaded ✓ circle in the same colour as a switch that is ON */
+:root[data-theme="sky"] .dl-b.ok .dl-c { background: #29414D; border-color: #29414D; }
+:root[data-theme="sky"] .dl-b.ok small { color: #29414D; }
+.dl-b.ok small { color: #2E8B57; }
+.dl-b.run .dl-c { border: 0; background: conic-gradient(#E9C46A calc(var(--p) * 1%), var(--line) 0); }
+.dl-b.run .dl-c::before { content: ''; position: absolute; inset: 3px; border-radius: 50%; background: var(--surface); }
+.dl-b.run i { position: relative; font-style: normal; font-size: 10.5px; font-weight: 700; color: var(--ink); }
+.dl-prog { height: 10px; border-radius: 99px; background: var(--surface-2); border: 1px solid var(--line); overflow: hidden; margin: 16px 0 8px; }
+.dl-prog span { display: block; height: 100%; background: linear-gradient(90deg, #E9C46A, var(--primary)); transition: width .3s; }
+.dl-txt { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+.dl-btn { text-decoration: none; padding: 13px 16px; }
+
+/* ---------- word analysis (Al-Miftah) ---------- */
+.an-back { display: inline-flex; align-items: center; gap: 4px; font-size: 13px; color: var(--accent); margin-bottom: 4px; }
+.an-back svg { transform: scaleX(-1); width: 16px; height: 16px; }
+.an-word { direction: rtl; text-align: center; font-family: var(--ar-font), "QalamMajeed"; font-size: 44px; line-height: 1.8; color: var(--ink-ar); }
+.an-head { text-align: center; color: var(--muted); font-size: 13px; margin-top: -6px; }
+.an-head bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 20px; color: var(--primary); }
+.an-type { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin: 10px 0; }
+.an-type .badge { font-size: 12px; padding: 3px 10px; }
+.an-type .badge.big { font-size: 14px; background: var(--primary); color: #fff; }
+.an-type .badge.q { background: color-mix(in srgb, var(--accent) 14%, transparent); color: var(--accent); }
+.an-parts { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 4px; margin-bottom: 10px; }
+.an-parts .chip { font-size: 13px; padding: 4px 10px; }
+.an-parts bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 18px; }
+.an-parts .plus { color: var(--muted); }
+.an-rows { border-radius: 16px; background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
+.an-row { display: flex; gap: 12px; padding: 10px 14px; align-items: baseline; }
+.an-row + .an-row { border-top: 1px solid var(--line); }
+.an-row span { flex: 0 0 38%; font-size: 12.5px; color: var(--muted); }
+.an-row b { flex: 1; font-weight: 600; font-family: var(--gu-font), "NotoGuj"; }
+.an-row.hl { background: color-mix(in srgb, var(--gold-2) 16%, var(--surface)); }
+.an-row .ar-b bdi, .an-row .ar-s { font-family: var(--ar-font), "QalamMajeed"; font-size: 19px; font-weight: 400; }
+
+/* ---------- full grammar (Quranic Arabic Corpus) ---------- */
+.g-parts { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 6px; margin: 8px 0 12px; direction: rtl; }
+.g-parts .plus { color: var(--muted); }
+.gp { display: flex; flex-direction: column; align-items: center; padding: 4px 12px 6px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface); direction: ltr; }
+.gp bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 30px; line-height: 1.7; color: var(--ink-ar); }
+.gp small { font-size: 15px; color: var(--muted); }
+.gp.stem { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 9%, var(--surface)); }
+.gp.pre { border-color: #C49A3A; }
+.gp.suf { border-color: #7D4BA8; }
+.gp.dim { opacity: .45; }
+.g-kind { border-radius: 16px; padding: 12px 14px; color: #fff; margin-bottom: 10px; background: linear-gradient(135deg, var(--hero-1), var(--primary-2)); }
+/* every kind (fe'l, ism, harf) uses the theme's green */
+.g-kind b { font-size: 22px; }
+.g-kind bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 26px; color: #F6E3B0; }
+.g-kind > span { display: block; font-size: 18px; opacity: .95; margin-top: 4px; line-height: 1.5; }
+.g-kind small { display: block; font-size: 18px; opacity: .9; margin-top: 6px; line-height: 1.5; }
+.g-tiles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-bottom: 10px; }
+.gt { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+.gt .gl { font-size: 15.5px; color: var(--gold); font-weight: 700; }
+.gt .gl bdi { font-family: var(--ar-font), "QalamMajeed"; font-weight: 400; font-size: 19px; }
+.gt b { font-size: 20px; font-family: var(--gu-font), "NotoGuj"; line-height: 1.45; }
+.gt .arv { font-family: var(--ar-font), "QalamMajeed"; font-size: 28px; font-weight: 400; color: var(--ink-ar); }
+.gt small { font-size: 18px; color: var(--muted); line-height: 1.6; }
+.gt small bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 25px; }
+.g-mean { border-radius: 16px; background: var(--surface); border: 1px solid var(--line); overflow: hidden; margin-bottom: 10px; }
+.gm { display: flex; flex-direction: column; padding: 9px 14px; }
+.gm + .gm { border-top: 1px solid var(--line); }
+.gm span { font-size: 15.5px; color: var(--muted); }
+.gm b { font-family: var(--gu-font), "NotoGuj"; font-size: 21px; line-height: 1.5; }
+.gm.hl { background: color-mix(in srgb, var(--gold-2) 16%, var(--surface)); }
+/* sarf: which i'lal rule made this word, step by step */
+.sarf { border-radius: 16px; border: 1px solid var(--line); background: var(--surface); padding: 12px 14px; margin-bottom: 10px; }
+.sf-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.sf-head b { font-size: 18px; color: var(--accent); }
+.sf-head bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 24px; color: var(--gold); }
+.sf-chip { display: inline-flex; gap: 6px; align-items: baseline; padding: 2px 12px; border-radius: 999px; margin: 6px 6px 0 0; font-weight: 700; font-size: 16px;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 35%, transparent); }
+.sf-chip bdi { font-family: var(--ar-font), "QalamMajeed"; font-weight: 400; font-size: 21px; }
+.sf-root { margin-top: 8px; font-size: 16px; color: var(--muted); }
+.sf-root bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 24px; color: var(--ink-ar); word-spacing: 6px; }
+.sf-type p { margin: 4px 0 0; font-size: 16px; line-height: 1.55; }
+.sf-steps { margin-top: 12px; display: flex; flex-direction: column; }
+.sf-step { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 2px 14px; border-radius: 12px;
+  background: color-mix(in srgb, var(--gold-2) 12%, var(--surface)); border: 1px solid var(--line); }
+.sf-step span { font-size: 14.5px; color: var(--muted); font-weight: 700; white-space: nowrap; }
+.sf-step bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 32px; line-height: 1.8; color: var(--ink-ar); }
+.sf-step.last { background: color-mix(in srgb, var(--accent) 13%, var(--surface)); border-color: var(--accent); }
+.sf-rule { margin-left: 22px; padding: 8px 0 8px 16px; border-left: 2px dashed var(--gold); font-size: 16px; line-height: 1.6; }
+.sf-rule b { display: inline-block; font-size: 14px; padding: 1px 9px; border-radius: 8px; background: var(--gold); color: #fff; margin-right: 6px; }
+.sf-note { margin-top: 10px; font-size: 15.5px; line-height: 1.55; color: var(--muted); }
+.sf-type p bdi, .sf-rule bdi, .sf-note bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 21px; color: var(--ink-ar); }
+.sf-rule b bdi { font-size: 17px; color: #fff; }
+.sf-ex { margin-top: 6px; font-size: 16.5px; font-weight: 700; color: var(--accent); }
+.sf-rule .sf-ex bdi { font-size: 30px; font-weight: 400; }
+.g-sep { height: 1px; background: var(--line); margin: 14px 0; }
+.g-note { font-size: 15.5px; color: var(--muted); text-align: center; margin: 6px 0; }
+
+/* ---------- search suggestions (Al-Miftah style) ---------- */
+.sugg { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.sugg-row { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); text-align: left; }
+.sugg-row.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 8%, var(--surface)); }
+.sugg-row .sg-l { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.sugg-row .sg-l b { font-family: var(--gu-font), "NotoGuj"; font-size: 15px; }
+.sugg-row .sg-l small { font-size: 12px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.sugg-row .sg-ar { font-family: var(--ar-font), "QalamMajeed"; font-size: 22px; line-height: 1.7; color: var(--primary); flex: none; }
+.sugg-row > svg { color: var(--muted); width: 18px; height: 18px; }
+
+.search-wrap { position: relative; z-index: 6; }
+.search-wrap .search-box { margin-bottom: 0; }
+.sugg-drop { position: absolute; left: 0; right: 0; top: calc(100% + 6px); max-height: 60vh; overflow-y: auto; padding: 6px; border-radius: 16px;
+  background: var(--surface); border: 1px solid var(--line); box-shadow: 0 12px 30px rgba(0,0,0,.16); display: flex; flex-direction: column; gap: 4px; }
+.sugg-drop .sugg-row { border: 0; border-radius: 10px; }
+.sugg-drop .sugg-row:active { background: var(--surface-2); }
+.sg-letters { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 4px 6px 8px; border-bottom: 1px solid var(--line); font-size: 12px; color: var(--muted); }
+.sg-letters button { display: flex; flex-direction: column; align-items: center; min-width: 40px; padding: 2px 6px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line); }
+.sg-letters b { font-family: var(--ar-font), "QalamMajeed"; font-size: 20px; line-height: 1.5; color: var(--ink-ar); }
+.sg-letters small { font-size: 10px; }
+/* voice search */
+.mic-btn { flex: none; width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; border: 0;
+  background: color-mix(in srgb, var(--accent) 12%, var(--surface)); color: var(--accent); }
+.mic-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; color: inherit; }
+.mic-btn.listening { background: var(--accent); color: #fff; animation: micPulse 1s ease-in-out infinite; }
+@keyframes micPulse { 50% { box-shadow: 0 0 0 8px color-mix(in srgb, var(--accent) 25%, transparent); } }
+.voice-row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-top: 8px; font-size: 13.5px; color: var(--muted); }
+.voice-row > span { display: inline-flex; align-items: center; gap: 4px; }
+.voice-row > span svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.voice-row .chip.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+.sg-voice { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 4px 6px 8px; border-bottom: 1px solid var(--line); font-size: 12.5px; color: var(--muted); }
+.sg-voice > span { display: inline-flex; align-items: center; gap: 4px; }
+.sg-voice svg { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.sg-voice button { padding: 3px 10px; border-radius: 10px; background: var(--surface-2); border: 1px solid var(--line); font-size: 15px; color: var(--ink); }
+.sg-voice button.on { border-color: var(--accent); color: var(--accent); font-weight: 700; }
+.sg-none { padding: 10px; font-size: 13.5px; color: var(--muted); }
+.try-row { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 4px; }
+.try-row .chip small { color: var(--muted); font-size: 10.5px; }
+.chosen { display: flex; align-items: center; gap: 12px; margin: 12px 0 4px; padding: 10px 12px; border-radius: 14px; background: color-mix(in srgb, var(--accent) 9%, var(--surface)); border: 1.5px solid var(--accent); }
+.chosen span { flex: 1; display: flex; flex-direction: column; }
+.chosen small { font-size: 12px; color: var(--muted); }
+.chosen .sg-ar { font-family: var(--ar-font), "QalamMajeed"; font-size: 26px; line-height: 1.6; color: var(--primary); }
+.chosen button { color: var(--muted); }
+.search-wrap + .try-row, .search-wrap ~ #results { position: relative; z-index: 1; }
+
+/* ---------- tafseer (narrations, like Duao no Majmuo) ---------- */
+.tafs-ayah { padding: 12px 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); margin: 8px 0 12px; }
+.tafs-ayah .ar { direction: rtl; text-align: right; font-family: var(--ar-font), "QalamMajeed"; font-size: calc(var(--fs-ar) * .85); line-height: 2; color: var(--ink-ar); }
+.tafs-ayah .gu { font-family: var(--gu-font), "NotoGuj"; font-size: calc(var(--fs-gu) * .9); line-height: 1.7; margin-top: 4px; }
+.tafs-meta { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: var(--muted); margin: 6px 2px 8px; }
+.tafs-ar-toggle { display: flex; align-items: center; gap: 4px; }
+.hadith { padding: 12px 14px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); margin-bottom: 10px; box-shadow: var(--shadow); }
+.h-sec { font-size: 12px; font-weight: 700; color: var(--gold); margin-bottom: 6px; }
+.h-by { display: inline-block; font-size: 12px; font-weight: 600; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, transparent); padding: 3px 10px; border-radius: 99px; margin-bottom: 8px; }
+.h-ar { direction: rtl; text-align: right; font-family: "QalamMajeed"; font-size: calc(var(--fs-gu) + 3px); line-height: 2; color: var(--ink-ar); margin-bottom: 8px; }
+.h-gu { font-family: var(--gu-font), "NotoGuj"; font-size: var(--fs-gu); line-height: 1.8; white-space: pre-line; }
+.h-ref { font-size: 11.5px; color: var(--muted); margin-top: 8px; padding-top: 6px; border-top: 1px dashed var(--line); }
+
+/* ---------- vertical bookmark tabs ---------- */
+.bm-layout { display: flex; gap: 10px; align-items: flex-start; }
+.bm-rail { width: 96px; flex: none; display: flex; flex-direction: column; gap: 6px; position: sticky; top: 72px; }
+.rail-tab { display: flex; flex-direction: column; align-items: flex-start; gap: 1px; padding: 9px 10px 8px 12px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); text-align: left; position: relative; overflow: hidden; }
+.rail-tab::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--c); }
+.rail-tab b { font-size: 13.5px; line-height: 1.3; word-break: break-word; }
+.rail-tab span { font-size: 11.5px; color: var(--muted); }
+.rail-tab.on { background: color-mix(in srgb, var(--c) 14%, var(--surface)); border-color: var(--c); }
+.rail-tab.add { align-items: center; border-style: dashed; color: var(--accent); padding-left: 10px; }
+.rail-tab.add::before { display: none; }
+.rail-tab.add svg { width: 18px; height: 18px; }
+.bm-main { flex: 1; min-width: 0; }
+.bm-main .res.bm { padding: 10px; }
+
+/* ---------- brand in the top bar ---------- */
+.bar-title.brand { display: flex; align-items: center; gap: 8px; font-size: 20px; letter-spacing: .2px; }
+/* home: the Quran picture spans from the top of "Noor" to the bottom of the line under it,
+   and both lines start at the same left edge */
+.bar-titles.branded { position: relative; padding-left: 44px; }
+.bar-title .q3d { position: absolute; left: 0; top: 50%; transform: translateY(-50%); height: 38px; width: 38px; object-fit: cover;
+  border-radius: 10px; border: 1px solid rgba(217, 178, 92, .6); box-shadow: 0 1px 4px rgba(0,0,0,.35); }
+.bar-titles.branded .bar-sub { margin-top: -4px; }
+
+/* ---------- isal-e-sawab / developer (from the Meezan app) ---------- */
+#view:has(> .isal) { padding-bottom: calc(72px + var(--safe-b)); }
+.isal { --g: clamp(0px, calc((100vh - 690px) / 8), 12px); --ph: clamp(70px, min(calc(100vh - 540px - 5 * var(--g) - var(--safe-b)), calc((100vw - 76px) * 2 / 3)), 260px); text-align: center; border-radius: 22px; padding: 9px 14px 8px; margin-bottom: calc(2px + var(--g)); background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.isal-head { position: relative; top: 6px; display: flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap; }
+.isal-star { display: flex; }
+.isal-star svg { width: 20px; height: 20px; color: var(--gold); fill: color-mix(in srgb, var(--gold) 25%, transparent); }
+.isal-head .ar-line { position: relative; top: -1px; font-family: "QalamMajeed", serif; font-size: min(23px, 6.1vw); line-height: 1.5; color: var(--gold); direction: rtl; }
+.isal-head h2 { margin: 0; font-size: min(21px, 5.6vw); color: var(--primary); }
+:root[data-dark="1"] .isal-head h2 { color: var(--accent); }
+.isal .ornament { display: flex; justify-content: center; margin: 4px 0; }
+.isal .ornament svg { width: 20px; height: 20px; color: var(--gold); fill: color-mix(in srgb, var(--gold) 25%, transparent); }
+/* light golden lines either side of the star */
+.isal .gold-rule { align-items: center; gap: 10px; }
+.isal .gold-rule::before, .isal .gold-rule::after { content: ""; flex: 0 1 90px; height: 1.5px; background: linear-gradient(90deg, transparent, #E2C27A); }
+.isal .gold-rule::after { transform: scaleX(-1); }
+.gold-line { height: 1.5px; margin: 18px 20px 4px; background: linear-gradient(90deg, transparent, #E2C27A 20%, #E2C27A 80%, transparent); }
+.fatiha.gu { margin-top: 4px; font-family: var(--gu-font), "NotoGuj", sans-serif; }
+.memorials { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: calc(12px + var(--g)); }
+.memorial { margin: 0; }
+.memorial .frame { width: fit-content; max-width: 100%; margin: 0 auto; padding: 3.75px; border-radius: 17px; background: linear-gradient(150deg, #E2C27A, #9C7426); box-shadow: 0 6px 16px rgba(60, 40, 0, .22); }
+.memorial img { display: block; height: var(--ph); max-width: 100%; aspect-ratio: 3 / 4; object-fit: cover; border-radius: 14px; }
+.memorial figcaption { margin-top: calc(8px + var(--g)); font-size: 13.5px; line-height: 1.35; font-family: system-ui, "Roboto", sans-serif; }
+.memorial figcaption b { display: block; font-size: min(14.5px, 3.5vw); white-space: nowrap; color: var(--ink); }
+.memorial figcaption span { display: block; margin-top: 6px; font-size: min(13.33px, 3.35vw); white-space: nowrap; color: var(--muted); }
+.fatiha { margin: 0 4px; font-size: 16.2px; color: var(--muted); }
+.fatiha:not(.gu) { margin-inline: 0; white-space: nowrap; font-size: min(16.2px, calc((100vw - 58px) / 22.5)); }
+.isal .isal-rule { margin: calc(3px + var(--g)) 0 calc(5px + var(--g)); }
+.dev-card { display: grid; grid-template-columns: auto auto; justify-content: center; align-items: center; gap: 2px 14px; text-align: left; border-radius: 22px; padding: 4px 16px; color: var(--ink); font-family: system-ui, "Roboto", sans-serif; line-height: 1.25; }
+.dev-card .dev-label { grid-column: 2; }
+.dev-logo { grid-column: 1; width: 82px; height: 82px; margin-top: 2px; border: 1.5px solid var(--gold); border-radius: 8%; }
+.dev-text { min-width: 0; }
+@media (max-width: 340px) { .dev-card { padding-inline: 12px; column-gap: 12px; } }
+.dev-label { font-size: 13.5px; color: var(--ink); margin-bottom: 4px; }
+.dev-name { font-size: 22px; font-weight: 700; line-height: 22px; margin-bottom: 4px; color: var(--gold); }
+.dev-person { font-size: 16px; line-height: 20px; margin-bottom: 4px; }
+.dev-place { font-size: 13.5px; line-height: 18px; margin-bottom: 4px; opacity: .8; }
+.dev-card .btn.ghost.dev-phone { display: block; margin-top: 0; line-height: 16px; padding: 0; border: 0; border-radius: 0; color: var(--ink); background: transparent; font-size: min(15px, 3.9vw); white-space: nowrap; }
+.tabs a { font-size: 11px; }
+
+/* ---------- sheet ---------- */
+.sheet-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,.42); z-index: 40; opacity: 0; pointer-events: none; transition: opacity .2s; }
+.sheet-backdrop.on { opacity: 1; pointer-events: auto; }
+.sheet {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 41;
+  max-height: 86vh; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--bg); border-radius: 24px 24px 0 0;
+  padding: 8px 16px calc(18px + var(--safe-b));
+  transform: translateY(105%); transition: transform .25s cubic-bezier(.2,.8,.2,1);
+  max-width: 820px; margin: 0 auto;
+}
+.sheet.on { transform: none; }
+.sheet .grip { width: 40px; height: 4px; border-radius: 4px; background: var(--line); margin: 4px auto 12px; }
+.sheet h3 { margin: 0 0 4px; font-size: 18px; }
+.sheet .sub { color: var(--muted); font-size: 13px; margin-bottom: 14px; }
+.sheet .sec { margin: 16px 0 8px; font-size: 13px; font-weight: 700; color: var(--gold); }
+.sheet .stepper { display: flex; align-items: center; gap: 8px; }
+.sheet .stepper input { width: 70px; text-align: center; padding: 8px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); font-size: 16px; }
+.act-list { display: flex; flex-direction: column; }
+.act-list button { display: flex; align-items: center; gap: 14px; padding: 13px 6px; text-align: left; font-size: 15.5px; border-radius: 12px; }
+.act-list button:active { background: var(--surface-2); }
+.act-list svg { color: var(--accent); }
+.colors { display: flex; gap: 10px; }
+.colors button { width: 34px; height: 34px; border-radius: 50%; border: 3px solid transparent; }
+.colors button.on { border-color: var(--ink); }
+.note-input { width: 100%; padding: 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); font-family: var(--ui-font); font-size: 15px; resize: none; }
+
+/* ---------- toast ---------- */
+.toast {
+  position: fixed; left: 50%; bottom: calc(150px + var(--safe-b)); z-index: 60;
+  transform: translateX(-50%) translateY(10px); opacity: 0; pointer-events: none;
+  padding: 10px 18px; border-radius: 99px; background: rgba(20, 30, 28, .92); color: #fff; font-size: 14px;
+  transition: .2s; white-space: nowrap;
+}
+.toast.on { opacity: 1; transform: translateX(-50%); }
+
+/* ---------- about ---------- */
+.about { text-align: center; padding: 10px 0 4px; }
+.about .logo { width: 76px; height: 76px; border-radius: 22px; box-shadow: var(--shadow); }
+.about .nm { font-size: 18px; font-weight: 700; margin-top: 8px; }
+.about .d { font-size: 13px; color: var(--muted); }
+
+/* ---------- v4.2: notes on an ayah ---------- */
+.my-note { display: flex; gap: 8px; align-items: flex-start; margin-top: 10px; padding: 10px 12px; border-radius: 12px;
+  background: color-mix(in srgb, var(--gold) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+  font-size: 14px; line-height: 1.6; white-space: pre-wrap; cursor: pointer; }
+.my-note svg { width: 16px; height: 16px; flex: none; color: var(--gold); margin-top: 3px; }
+body.fs .my-note { display: none; }
+
+/* ---------- hifz ---------- */
+.hz-only { display: none !important; }
+body.hifz .hz-only { display: inline-flex !important; }
+body.hifz .ayah .ar-text { filter: blur(9px); transition: filter .25s; cursor: pointer; user-select: none; }
+body.hifz .ayah.reveal .ar-text, body.hifz .ayah.playing .ar-text { filter: none; }
+.hz-score { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-radius: 14px; margin: 4px 0 10px; font-weight: 600; }
+.hz-score b { font-size: 30px; }
+.hz-score.good { background: #E3F4EA; color: #1E7A47; }
+.hz-score.mid { background: #FFF4D6; color: #8A6512; }
+.hz-score.low { background: #FBE6E3; color: #A33A2C; }
+:root[data-dark="1"] .hz-score.good { background: #163325; color: #7FD3A2; }
+:root[data-dark="1"] .hz-score.mid { background: #33290F; color: #E8C979; }
+:root[data-dark="1"] .hz-score.low { background: #3A1C18; color: #F0998C; }
+.hz-words { direction: rtl; text-align: right; font-family: var(--ar-font), "QalamMajeed", serif; font-size: 28px; line-height: 2.1; padding: 8px 4px; }
+.hz-words .ok { color: #1E8A50; }
+.hz-words .miss { color: #C0453A; text-decoration: underline wavy rgba(192, 69, 58, .5); }
+
+/* ---------- ayah picture ---------- */
+.share-prev { display: block; width: 100%; max-height: 60vh; object-fit: contain; border-radius: 12px; box-shadow: var(--shadow); background: #06352F; }
+
+/* ---------- khatam tracker ---------- */
+.kh-card { width: 100%; display: flex; align-items: center; gap: 12px; text-align: left; padding: 12px 14px; margin: 0 0 12px;
+  border-radius: 18px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.kh-ic { width: 40px; height: 40px; flex: none; border-radius: 12px; display: grid; place-items: center; color: #fff; background: linear-gradient(135deg, var(--accent), var(--primary)); }
+.kh-card .main { flex: 1; min-width: 0; }
+.kh-l { display: flex; justify-content: space-between; gap: 8px; font-size: 14px; }
+.kh-l b { color: var(--primary); }
+.kh-l.sm { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.kh-bar { height: 8px; border-radius: 99px; background: var(--surface-2); border: 1px solid var(--line); overflow: hidden; margin-top: 6px; }
+.kh-bar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--gold-2), var(--gold)); }
+.kh-week { display: flex; align-items: flex-end; gap: 8px; height: 130px; padding: 8px 4px 0; margin: 6px 0 4px; }
+.kh-day { flex: 1; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; }
+.kh-day i { width: 100%; max-width: 30px; min-height: 3px; border-radius: 8px 8px 3px 3px; background: color-mix(in srgb, var(--accent) 40%, var(--surface-2)); }
+.kh-day.hit i { background: var(--gold); }
+.kh-day small { font-size: 11px; color: var(--muted); }
+.kh-day span { font-size: 11px; color: var(--muted); }
+.kh-done { text-align: center; padding: 10px 6px 4px; }
+.kh-done svg { width: 64px; height: 64px; color: var(--gold); fill: color-mix(in srgb, var(--gold) 25%, transparent); }
+
+/* ---------- sipara progress at the side (shown on a tap, cannot be touched) ---------- */
+#juzBar { position: fixed; right: 3px; top: 74px; bottom: calc(96px + var(--safe-b)); width: 60px; z-index: 18; pointer-events: none;
+  opacity: 0; transition: opacity .35s; }
+#juzBar.on { opacity: 1; }
+body.has-player #juzBar { bottom: calc(176px + var(--safe-b)); }
+body.no-tabs #juzBar { bottom: calc(24px + var(--safe-b)); }
+body.no-tabs.has-player #juzBar { bottom: calc(110px + var(--safe-b)); }
+body.fs #juzBar { top: 16px; }
+.jb-track { position: absolute; right: 2px; top: 0; bottom: 0; width: 5px; border-radius: 99px; background: rgba(120, 120, 120, .18); }
+.jb-track i { position: absolute; left: 0; right: 0; top: 0; border-radius: 99px; background: color-mix(in srgb, var(--accent) 45%, transparent); }
+.jb-track b { position: absolute; right: -3px; width: 11px; height: 26px; margin-top: -13px; border-radius: 99px; background: color-mix(in srgb, var(--accent) 75%, transparent); box-shadow: 0 1px 4px rgba(0,0,0,.2); }
+.jb-tip { position: absolute; right: 16px; margin-top: -20px; padding: 4px 8px; border-radius: 10px; white-space: nowrap; text-align: right;
+  background: color-mix(in srgb, var(--surface) 82%, transparent); border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 11px; line-height: 1.35; color: var(--muted); }
+.jb-tip b { display: block; color: var(--primary); font-size: 12px; }
+
+/* ---------- duas & topics ---------- */
+.dua { padding: 14px; margin-bottom: 12px; border-radius: 18px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.dua-h { display: flex; gap: 10px; align-items: center; margin-bottom: 6px; }
+.dua-h .main { flex: 1; min-width: 0; }
+.dua-h b { display: block; font-size: 15.5px; color: var(--primary); line-height: 1.4; }
+.dua-h small { color: var(--muted); font-size: 12px; }
+.dua-n { width: 30px; height: 30px; flex: none; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 700; color: var(--gold); border: 1.5px solid var(--gold-2); }
+.dua-ar { font-size: calc(var(--fs-ar) * .85); }
+.dua-gu { font-size: calc(var(--fs-gu) * .85); }
+.dua-acts { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.dua-acts button { display: inline-flex; align-items: center; gap: 5px; padding: 6px 12px; border-radius: 99px; font-size: 13px; font-weight: 600; color: var(--accent); background: var(--surface-2); border: 1px solid var(--line); }
+.dua-acts svg { width: 16px; height: 16px; }
+.topic-head { text-align: center; padding: 10px 0 14px; }
+.topic-head .ar { font-family: "QalamMajeed", serif; font-size: 34px; color: var(--gold); direction: rtl; line-height: 1.8; }
+.topic-head b { font-size: 18px; color: var(--primary); }
+.topic-ayah .tx { margin-top: 6px; }
+.tabs a[hidden] { display: none !important; }
+.time-in { padding: 8px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface-2); font-size: 15px; }
+/* the user's dua (raised hands) picture, painted in the tab's own colour so it follows the theme */
+.tab-ic { display: block; width: 24px; height: 24px; background: currentColor;
+  -webkit-mask: url("dua.png") center / 105% no-repeat; mask: url("dua.png") center / 105% no-repeat; }
+
+/* ---------- What's New (once after an update) ---------- */
+.wn-head { text-align: center; padding: 4px 0 6px; }
+.wn-head h3 { margin: 8px 0 2px; font-size: 21px; }
+.wn-head .sub { font-size: 14.5px; }
+.wn-badge { display: inline-block; padding: 3px 12px; border-radius: 99px; font-size: 12px; font-weight: 700; color: var(--gold); background: var(--gold-soft); }
+.wn-list { display: flex; flex-direction: column; gap: 2px; margin-top: 6px; }
+.wn-row { display: flex; gap: 14px; align-items: flex-start; padding: 12px 4px; border-bottom: 1px solid var(--line); }
+.wn-row:last-child { border-bottom: 0; }
+.wn-ic { width: 44px; height: 44px; flex: none; border-radius: 11px; display: grid; place-items: center; color: var(--accent); background: color-mix(in srgb, var(--accent) 10%, var(--surface)); }
+.wn-ic svg, .wn-ic .tab-ic { width: 24px; height: 24px; }
+.wn-row .main { flex: 1; min-width: 0; }
+.wn-row b { display: block; font-size: 17.5px; color: var(--primary); }
+.wn-row .main span { font-size: 15px; color: var(--muted); line-height: 1.55; }
+
+.about .wn-open { margin-top: 12px; }
+
+/* ayah i'rab under word by word */
+.ir-legend { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 10px; }
+.irab { display: flex; flex-direction: column; gap: 8px; }
+.ir-row { padding: 10px 12px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); }
+.ir-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.ir-ar { font-family: var(--ar-font), "QalamMajeed"; font-size: 34px; line-height: 1.7; color: var(--ink-ar); }
+.ir-case { display: inline-block; font-size: 15px; font-weight: 400; padding: 3px 12px; border-radius: 99px; white-space: nowrap; }
+.ir-case bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 18px; }
+.ir-case.nom { background: color-mix(in srgb, #1e8e5a 16%, transparent); color: #1e8e5a; }
+.ir-case.acc { background: color-mix(in srgb, #2f6fd0 16%, transparent); color: #2f6fd0; }
+.ir-case.gen { background: color-mix(in srgb, #c8681c 16%, transparent); color: #c8681c; }
+.ir-case.jus { background: color-mix(in srgb, #8e44ad 16%, transparent); color: #8e44ad; }
+.ir-roles { display: flex; flex-wrap: wrap; gap: 5px; margin: 4px 0 2px; }
+.ir-role { font-size: 16px; font-weight: 400; padding: 3px 12px; border-radius: 8px; background: var(--gold); color: #fff; }
+.ir-role.ex { background: transparent; color: var(--gold); border: 1px solid var(--gold); }
+.ir-role bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 19px; }
+.ir-why p { margin: 6px 0 0; font-size: 17px; line-height: 1.65; }
+.ir-why bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 23px; color: var(--ink-ar); }
+.ir-why .ir-sum { font-weight: 700; color: var(--accent); }
+.ir-note { font-size: 14px; color: var(--muted); margin-top: 2px; }
+.ir-legend .ir-case { font-size: 14px; }
+/* word by word sheet: Words | Ayah Analysis */
+.wb-tabs { display: flex; gap: 6px; margin: 4px 0 12px; padding: 4px; border-radius: 99px; background: var(--surface); border: 1px solid var(--line); }
+.wb-tabs button { flex: 1; padding: 8px 6px; border-radius: 99px; font-size: 14.5px; font-weight: 600; color: var(--muted); }
+.wb-tabs button.on { background: var(--primary); color: #fff; }
+/* grammar, sarf and ayah analysis: the Gujarati font chosen in Settings */
+.sarf, .irab, .ir-legend, .wb-tabs, .g-kind, .g-tiles, .g-parts, .g-mean, .gc-legend, .an-row { font-family: var(--gu-font), "NotoGuj", sans-serif; }
+/* ---------- Quran words: frequency list and root families ---------- */
+.lx-ic { font-family: var(--ar-font), "QalamMajeed"; font-size: 26px; line-height: 1; padding-bottom: 6px; background: linear-gradient(135deg, var(--gold-2), var(--gold)); color: #3a2a06; }
+.lx-hero { border-radius: 22px; padding: 16px 16px 14px; margin-bottom: 16px; color: #fff;
+  background: radial-gradient(circle at 90% 10%, rgba(233,196,106,.3), transparent 45%), linear-gradient(140deg, var(--hero-1), var(--primary-2));
+  box-shadow: 0 10px 26px rgba(6,53,47,.22); }
+.lx-top { display: flex; align-items: center; gap: 14px; }
+.lx-big { font-size: 46px; font-weight: 800; line-height: 1; color: #F6E3B0; letter-spacing: -1px; }
+.lx-big small { font-size: 22px; font-weight: 700; }
+.lx-top b { display: block; font-size: 16px; }
+.lx-top span { display: block; font-size: 12.5px; opacity: .82; line-height: 1.45; }
+.lx-steps { display: flex; gap: 8px; margin-top: 14px; }
+.lx-steps div { flex: 1; position: relative; overflow: hidden; border-radius: 12px; padding: 8px 4px 6px; text-align: center; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.14); }
+.lx-steps i { position: absolute; left: 0; right: 0; bottom: 0; background: linear-gradient(0deg, rgba(233,196,106,.38), rgba(233,196,106,.1)); }
+.lx-steps b, .lx-steps small { position: relative; display: block; }
+.lx-steps b { font-size: 16px; }
+.lx-steps small { font-size: 11px; opacity: .8; }
+.lx-roots { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.lx-roots:empty { display: none; }
+.lx-rchip { display: flex; flex-direction: column; align-items: center; padding: 6px 14px 7px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); }
+.lx-rchip bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 24px; line-height: 1.5; color: var(--ink-ar); }
+.lx-rchip small { font-size: 11px; color: var(--muted); }
+.lx-seg { margin-bottom: 10px; }
+.lx-row { gap: 10px; padding: 9px 12px; }
+.lx-rank { width: 34px; height: 34px; flex: none; border-radius: 10px; display: grid; place-items: center; font-size: 12.5px; font-weight: 700; color: var(--primary); background: var(--gold-soft); }
+:root[data-dark="1"] .lx-rank { color: var(--gold-2); }
+.lx-gu { font-family: var(--gu-font), "NotoGuj"; font-size: 15.5px; font-weight: 600; color: var(--accent); line-height: 1.4; }
+.lx-row .d, .lx-fh .d { font-size: 12px; color: var(--muted); }
+.lx-r { font-family: var(--ar-font), "QalamMajeed"; font-size: 16px; color: var(--ink); }
+.lx-right { display: flex; flex-direction: column; align-items: flex-end; flex: none; max-width: 45%; }
+.lx-ar { font-family: var(--ar-font), "QalamMajeed"; font-size: 26px; line-height: 1.55; color: var(--ink-ar); direction: rtl; }
+.lx-n { font-size: 11px; font-weight: 700; color: var(--gold); white-space: nowrap; }
+.lx-rhead { text-align: center; border-radius: 22px; padding: 18px 14px 14px; margin-bottom: 14px; color: #fff;
+  background: radial-gradient(circle at 50% 0%, rgba(233,196,106,.3), transparent 55%), linear-gradient(140deg, var(--hero-1), var(--primary-2)); }
+.lx-rl { display: flex; justify-content: center; gap: 10px; direction: rtl; }
+.lx-rl span { width: 56px; height: 56px; border-radius: 16px; display: grid; place-items: center; font-family: var(--ar-font), "QalamMajeed"; font-size: 34px; line-height: 1;
+  color: #3a2a06; background: linear-gradient(135deg, #F6E3B0, #D9B25C); box-shadow: 0 4px 12px rgba(0,0,0,.18); padding-bottom: 8px; }
+.lx-rs { margin-top: 12px; font-size: 14px; }
+.lx-rs .dot { background: rgba(255,255,255,.6); }
+.lx-rn { font-size: 12px; opacity: .78; margin-top: 2px; }
+.lx-fams { display: flex; flex-direction: column; gap: 8px; }
+.lx-fam { border-radius: 16px; background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); overflow: hidden; }
+.lx-fam.on { border-color: color-mix(in srgb, var(--accent) 45%, var(--line)); }
+.lx-fh { width: 100%; display: flex; align-items: center; gap: 10px; padding: 8px 12px; text-align: left; }
+.lx-fh .main { flex: 1; min-width: 0; }
+.lx-fh .chev { transition: transform .2s; color: var(--muted); }
+.lx-fam.on .lx-fh .chev { transform: rotate(90deg); }
+.lx-occ { border-top: 1px solid var(--line); padding: 6px 10px 10px; background: var(--surface-2); }
+.lx-oc { display: block; padding: 8px 6px; border-bottom: 1px dashed var(--line); }
+.lx-oc:last-of-type { border-bottom: 0; }
+.lx-ref { display: flex; justify-content: space-between; gap: 8px; font-size: 12px; color: var(--muted); }
+.lx-ref b { color: var(--primary); font-weight: 600; }
+:root[data-dark="1"] .lx-ref b { color: var(--accent); }
+.lx-ref span { font-family: var(--gu-font), "NotoGuj"; color: var(--accent); font-weight: 600; }
+.lx-snip { font-family: var(--ar-font), "QalamMajeed"; font-size: 23px; line-height: 1.9; direction: rtl; text-align: right; color: var(--ink-ar); }
+.lx-snip mark { background: var(--gold-soft); color: inherit; border-radius: 6px; padding: 0 4px; box-shadow: inset 0 -2px 0 var(--gold-2); }
+.lx-omore { margin-top: 8px; }
+.g-rootlink { display: flex; align-items: center; gap: 12px; margin: 10px 0 4px; padding: 10px 12px; border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 9%, var(--surface)); border: 1px solid color-mix(in srgb, var(--accent) 30%, var(--line)); }
+.g-rootlink bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 24px; color: var(--ink-ar); flex: none; }
+.g-rootlink span { flex: 1; min-width: 0; font-family: var(--gu-font), "NotoGuj"; }
+.g-rootlink b { display: block; color: var(--accent); font-size: 14.5px; }
+.g-rootlink small { display: block; color: var(--muted); font-size: 12px; }
+/* ---------- v5.1: Today + Quran Words side by side ---------- */
+.home-pair { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 10px; margin-bottom: 12px; }
+.kh-card.half { margin: 0; flex-direction: column; align-items: stretch; gap: 2px; padding: 12px; }
+.kh-card.half .hc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.kh-card.half .hc-top .chev { color: var(--muted); width: 18px; height: 18px; }
+.kh-card.half .kh-ic { width: 36px; height: 36px; }
+.kh-card.half .hc-t { font-size: 15px; color: var(--primary); line-height: 1.3; }
+:root[data-dark="1"] .kh-card.half .hc-t { color: var(--accent); }
+.kh-card.half .hc-v { font-size: 13px; font-weight: 600; color: var(--ink); }
+.kh-card.half .hc-s { font-size: 11.5px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kh-card.half .kh-bar { margin: 5px 0 3px; }
+.lx-card.half .lx-ic { font-size: 23px; }
+
+/* root page: fe'l / baab / i'lal colours */
+.lx-ar.gc-fel { color: #2b7bd0; } .lx-ar.gc-baab { color: #9b4dca; } .lx-ar.gc-rule { color: #e0561b; }
+.lx-legend { margin: 0 0 10px; }
+
+/* Home tabs: the chosen one is a filled theme pill */
+.home-seg .seg button.on { background: var(--primary); color: #fff; font-weight: 700; box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 35%, transparent); }
+:root[data-dark="1"] .home-seg .seg button.on { background: var(--accent); color: #06231F; }
+/* v5.2: lower Today / Quran Words cards: icon beside the title */
+.kh-card.half { padding: 9px 11px; gap: 0; }
+.kh-card.half .hc-top { justify-content: flex-start; gap: 9px; margin-bottom: 4px; }
+.kh-card.half .hc-top > div { min-width: 0; display: flex; flex-direction: column; }
+.kh-card.half .kh-ic { width: 32px; height: 32px; border-radius: 10px; }
+.kh-card.half .kh-ic svg { width: 19px; height: 19px; }
+.kh-card.half .hc-t { font-size: 14px; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.kh-card.half .hc-v { font-size: 12px; line-height: 1.3; white-space: nowrap; }
+.kh-card.half .kh-bar { height: 6px; margin: 3px 0 2px; }
+.kh-card.half .hc-s { font-size: 11px; line-height: 1.4; }
+.lx-card.half .lx-ic { font-size: 20px; padding-bottom: 4px; }
+.lx-card.half .hc-s { margin-top: 3px; }
+/* v5.3: the lines under the title start where the title starts (past the icon) */
+.kh-card.half .kh-bar, .kh-card.half .hc-s { margin-left: 41px; }
+/* v5.4 — search roots, offline tafsir, collections, sigah table */
+.sg-head { font-size: 11px; font-weight: 800; letter-spacing: .08em; color: var(--muted); padding: 6px 4px 2px; }
+.sg-tag { display: inline-block; font-size: 10.5px; font-weight: 800; color: #fff; background: #9b4dca; border-radius: 6px; padding: 1px 6px; margin-right: 6px; vertical-align: 2px; }
+.sg-root { border-color: color-mix(in srgb, #9b4dca 35%, var(--line)); }
+.sg-root .sg-ar { color: #9b4dca; letter-spacing: 2px; }
+a.chosen { color: inherit; text-decoration: none; }
+.root-chosen { border-color: #9b4dca; background: color-mix(in srgb, #9b4dca 8%, var(--surface)); }
+.root-chosen .sg-ar { color: #9b4dca; letter-spacing: 2px; }
+.s-note { text-align: left; margin: 8px 2px 0; color: var(--gold); }
+.res .hd { display: flex; align-items: center; gap: 6px; }
+.res-save { margin-left: auto; width: 32px; height: 28px; display: grid; place-items: center; border-radius: 10px; color: var(--muted); }
+.res-save svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2; }
+.res-save.on { color: var(--accent); }
+.res-save.on svg { fill: currentColor; }
+.col-strip { display: flex; align-items: center; gap: 8px; overflow-x: auto; margin: 0 -16px 12px; padding: 2px 16px; scrollbar-width: none; }
+.col-strip::-webkit-scrollbar { display: none; }
+.col-h { display: inline-flex; align-items: center; gap: 5px; flex: none; font-size: 13px; color: var(--ink); }
+.col-h svg { width: 16px; height: 16px; fill: var(--accent); stroke: none; }
+.col-chip { flex: none; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 600;
+  background: color-mix(in srgb, var(--c, var(--accent)) 12%, var(--surface)); border: 1px solid color-mix(in srgb, var(--c, var(--accent)) 40%, transparent); color: var(--ink); }
+.col-chip small { font-size: 11px; font-weight: 700; color: #fff; background: var(--c, var(--accent)); border-radius: 999px; padding: 0 6px; min-width: 18px; text-align: center; }
+.col-chip.add { background: transparent; border-style: dashed; border-color: var(--line); color: var(--muted); }
+.col-chip.add svg { width: 14px; height: 14px; }
+.col-find { margin: 0 0 10px; }
+.tf-bar { height: 6px; border-radius: 6px; background: var(--line); margin-top: 8px; overflow: hidden; }
+.tf-bar i { display: block; height: 100%; width: 0; background: var(--accent); border-radius: 6px; transition: width .4s; }
+.tf-row .btn { flex: none; }
+.g-sigah { width: 100%; font: inherit; text-align: left; border-color: color-mix(in srgb, #2b7bd0 40%, var(--line)); }
+.g-sigah .sg-ic { flex: none; width: 38px; height: 38px; border-radius: 12px; display: grid; place-items: center; background: #2b7bd0; color: #fff; font-size: 17px; font-weight: 700; }
+.g-sigah b { color: #2b7bd0 !important; }
+.sgt-root { font-family: var(--ar-font), "QalamMajeed"; font-size: 22px; color: var(--primary); margin-left: 6px; }
+.sgt-babs { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 8px; scrollbar-width: none; }
+.sgt-babs button { flex: none; display: flex; flex-direction: column; align-items: center; padding: 4px 14px 6px; border-radius: 14px; border: 1px solid var(--line); background: var(--surface); }
+.sgt-babs bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 22px; line-height: 1.6; color: var(--ink-ar); }
+.sgt-babs small { font-size: 11px; color: var(--muted); }
+.sgt-babs button.on { background: var(--primary); border-color: var(--primary); }
+.sgt-babs button.on bdi, .sgt-babs button.on small { color: #fff; }
+.sgt-meta { font-size: 13px; color: var(--muted); margin: 2px 2px 10px; }
+.sgt-meta bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 17px; color: var(--ink-ar); }
+.sgt-seg { margin-bottom: 8px; }
+.sgt-seg bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 14px; opacity: .8; }
+.sgt { display: flex; flex-direction: column; gap: 6px; }
+.sgt-row { display: grid; grid-template-columns: 24px auto minmax(0, 1fr); align-items: center; gap: 8px; padding: 7px 10px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+.sgt-row.on { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--surface)); box-shadow: 0 0 0 1px var(--accent); }
+.sgt-n { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: color-mix(in srgb, var(--primary) 12%, transparent); color: var(--primary); font-size: 12px; font-weight: 700; }
+.sgt-p { display: flex; flex-direction: column; min-width: 0; }
+.sgt-p bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 19px; line-height: 1.5; color: var(--muted); }
+.sgt-p small { white-space: nowrap; font-family: var(--gu-font), "NotoGuj"; font-size: 13px; color: var(--ink); opacity: .75; line-height: 1.35; }
+.sgt-w { display: flex; flex-direction: column; align-items: flex-end; text-align: right; min-width: 0; }
+.sgt-ar { font-family: var(--ar-font), "QalamMajeed"; font-size: 24px; line-height: 1.6; color: var(--ink-ar); }
+.sgt-m { grid-column: 2 / -1; white-space: nowrap; overflow: hidden; text-align: right; margin-top: -4px; font-family: var(--gu-font), "NotoGuj"; font-size: 15px; font-weight: 600; color: var(--accent); line-height: 1.4; }.sgt-seg button.on { background: var(--primary); color: #fff; font-weight: 700; box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 35%, transparent); }
+.sgt-seg button.on bdi { opacity: 1; }
+:root[data-dark="1"] .sgt-seg button.on { background: var(--accent); color: #06231F; }
+.sgt-line { margin: 4px 0 12px; padding: 10px 12px 12px; border-radius: 16px; background: color-mix(in srgb, var(--primary) 7%, var(--surface)); border: 1px solid color-mix(in srgb, var(--primary) 25%, var(--line)); }
+.sgt-lh { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; font-size: 14px; }
+.sgt-lh > b { color: var(--primary); font-size: 15px; }
+.sgt-lh bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 18px; color: var(--muted); }
+.sgt-lh span { color: var(--muted); font-size: 13.5px; }
+.sgt-lh span b { color: var(--ink); }
+.sgt-lw { display: flex; flex-direction: row-reverse; flex-wrap: wrap; justify-content: space-around; gap: 6px 14px; margin-top: 6px; }
+.sgt-lw div { display: flex; flex-direction: column; align-items: center; }
+.sgt-lw bdi { font-family: var(--ar-font), "QalamMajeed"; font-size: 26px; line-height: 1.6; color: var(--ink-ar); }
+.sgt-lw small { font-size: 12px; font-weight: 600; color: var(--accent); }
+.sgt-ln { font-size: 12px; color: var(--muted); text-align: center; margin-top: 4px; }/* v5.6: person labels stacked on the left, the Arabic pronoun large beside them */
+.sgt-p { flex-direction: row; align-items: center; gap: 8px; }
+.sgt-pg { display: flex; flex-direction: column; font-family: var(--gu-font), "NotoGuj"; font-size: 11.5px; line-height: 1.3; color: var(--muted); }
+.sgt-pg i { font-style: normal; white-space: nowrap; }
+.sgt-p bdi { font-size: 25px; line-height: 1.4; color: var(--ink-ar); }/* v5.7: number, person and pronoun centred on the whole row (Arabic word + meaning); a larger baab line */
+.sgt-n, .sgt-p { grid-row: 1 / span 2; align-self: center; }
+.sgt-w, .sgt-m { grid-column: 3; }
+.sgt-m { margin-top: -2px; }
+.sgt-lh { font-size: 16px; }
+.sgt-lh > b { font-size: 17px; }
+.sgt-lh bdi { font-size: 22px; }
+.sgt-lh span { font-size: 15px; }
+.sgt-lw bdi { font-size: 31px; }
+.sgt-lw small { font-size: 14px; }
+.sgt-ln { font-size: 13.5px; }/* v5.9: the Maazi / Muzaare / Amr tabs: green, larger, on a light green strip; the chosen one filled */
+.sgt-seg { background: color-mix(in srgb, var(--primary) 9%, var(--surface)); border: 1.5px solid color-mix(in srgb, var(--primary) 35%, var(--line)); }
+.sgt-seg button { color: var(--primary); font-size: 16px; font-weight: 700; padding-block: 8px; }
+.sgt-seg button bdi { font-size: 17px; opacity: .85; }
+.sgt-seg button.on { color: #fff; }
+:root[data-dark="1"] .sgt-seg button:not(.on) { color: var(--accent); }
+.sgt-lw small { color: var(--primary); font-size: 15px; font-weight: 700; }
+:root[data-dark="1"] .sgt-lw small { color: var(--accent); }
+/* not bold, only larger (user's wish) */
+.sgt-seg button, .sgt-seg button.on { font-weight: 400; font-size: 17px; }
+.sgt-lw small { font-weight: 400; font-size: 16px; }
+/* v6.0: in the Maazi / Muzaare / Amr tabs only the Gujarati word is bold */
+.sgt-seg button b { font-weight: 700; }
+.sgt-lw small { font-weight: 700; }
+/* home Surah / Sipara / Sajdah … tabs in the colours of the surah-number star: gold fill and gold border */
+.home-seg .seg { background: var(--gold-soft); border: 1.5px solid var(--gold); }
+.home-seg .seg button:not(.on) { color: var(--gold); font-weight: 600; }/* v6.1: the other home tabs bold and green, like the Today / Quran Words titles */
+.home-seg .seg button:not(.on) { color: var(--primary); font-weight: 700; }
+:root[data-dark="1"] .home-seg .seg button:not(.on) { color: var(--accent); }
+/* v6.2: sigah meanings in green; the Maazi / Muzaare / Amr tabs dressed like the home Surah / Sipara tabs */
+.sgt-m { color: var(--primary); }
+:root[data-dark="1"] .sgt-m { color: var(--accent); }
+.sgt-seg { background: var(--gold-soft); border: 1.5px solid var(--gold); }
+.sgt-seg button:not(.on) { color: var(--primary); }
+:root[data-dark="1"] .sgt-seg button:not(.on) { color: var(--accent); }
+.sgt-seg button.on { background: var(--primary); color: #fff; box-shadow: 0 2px 8px color-mix(in srgb, var(--primary) 35%, transparent); }/* v6.3: a line under the baab heading, and upright lines between maazi / muzaare / masdar / amr */
+.sgt-lh { padding-bottom: 8px; border-bottom: 1.5px solid color-mix(in srgb, var(--primary) 30%, var(--line)); }
+.sgt-lw { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); direction: rtl; gap: 0; margin-top: 8px; }
+.sgt-lw div { padding: 2px 4px; min-width: 0; }
+.sgt-lw div + div { border-right: 1.5px solid color-mix(in srgb, var(--primary) 30%, var(--line)); }
+.sgt-lw small { direction: ltr; }/* v6.3: a line between the three lines of the green word-kind box */
+.g-kind > * + * { border-top: 1px solid rgba(255,255,255,.35); margin-top: 8px; padding-top: 8px; }
+/* v6.3: the baab heading in a gold box like the Maazi / Muzaare tabs, without the line under it */
+.sgt-lh { border-bottom: 0; padding: 7px 12px; border-radius: 12px; background: var(--gold-soft); border: 1.5px solid var(--gold); }
+/* v6.3: larger text in the baab heading box */
+.sgt-lh > b { font-size: 19px; }
+.sgt-lh bdi { font-size: 25px; }
+.sgt-lh span { font-size: 17px; }
+/* v6.3: the baab box in the same light colour as the sigah rows */
+.sgt-line { background: var(--surface); border-color: var(--line); }
+/* v6.3: the word's parts (prefix + word + ending) stay on one line */
+.g-parts { flex-wrap: nowrap; gap: 4px; }
+.g-parts .plus { flex: none; }
+.gp { flex: 0 1 auto; min-width: 0; padding: 4px 8px 6px; }
+.gp small { text-align: center; line-height: 1.35; font-size: 13.5px; }/* v6.3: the parts as equal boxes, same width and height, content centred */
+.g-parts { align-items: stretch; }
+.g-parts .plus { align-self: center; }
+.gp { flex: 1 1 0; max-width: 150px; justify-content: center; }/* v6.3: even 10px gaps around the root link and the Sigah Table button */
+.g-rootlink { margin: 0 0 10px; }
+/* Sigah Table button in the home-tab colours: gold fill and border, green title; "14" in gold on a green box */
+.g-sigah { background: var(--gold-soft); border: 1.5px solid var(--gold); }
+.g-sigah b { color: var(--primary) !important; }
+.g-sigah .sg-ic { background: var(--primary); color: var(--gold-2); font-size: 18px; font-weight: 700; }
+:root[data-dark="1"] .g-sigah b { color: var(--accent) !important; }/* v6.4: an upright gold line between the tabs that are not chosen (home Surah / Sipara … and Maazi / Muzaare / Amr) */
+.home-seg .seg button, .sgt-seg button { position: relative; }
+.home-seg .seg button:not(.on) + button:not(.on)::before, .sgt-seg button:not(.on) + button:not(.on)::before {
+  content: ""; position: absolute; left: -3px; top: 22%; bottom: 22%; width: 1.5px; border-radius: 1px; background: var(--gold); }/* v6.4: the tab dividers drawn exactly like the strip's own border; baab-line Arabic 2px smaller */
+.home-seg .seg button:not(.on) + button:not(.on)::before, .sgt-seg button:not(.on) + button:not(.on)::before {
+  width: 0; background: none; border-left: 1.5px solid var(--gold); border-radius: 0; top: 18%; bottom: 18%; }
+.sgt-lw bdi { font-size: 29px; }/* v6.4: each baab button shows its meaning */
+.sgt-bm { font-family: var(--gu-font), "NotoGuj"; font-size: 13.5px; font-weight: 600; color: var(--primary); line-height: 1.3; white-space: nowrap; }
+.sgt-babs button.on .sgt-bm { color: var(--gold-2); }
+
+/* ---------- v6.5: reader toolbar stays under the bar; icons in green rounds with gold; hifz reveal modes ---------- */
+.reader-tools { position: sticky; top: var(--bar-h, 60px); z-index: 15; margin: 0 -14px 10px; padding: 8px 14px 6px;
+  background: var(--bg); box-shadow: 0 6px 10px -8px rgba(0,0,0,.25); }
+.reader-tools .view-toggles { margin: 0; }
+.reader-tools .gc-legend, .reader-tools .hz-modes { margin-top: 6px; }
+.view-toggles + .gc-legend { margin-top: 6px; }
+.vt { padding: 4px 6px 4px 4px; gap: 5px; }
+.vt .vi { width: 22px; height: 22px; flex: none; border-radius: 50%; display: grid; place-items: center;
+  background: var(--primary); color: #E9C46A; box-shadow: inset 0 0 0 1px rgba(233,196,106,.55); }
+.vt .vi svg { width: 13px; height: 13px; stroke: #E9C46A; }
+.vt .vi i { font-size: 10.5px; color: #E9C46A; }
+.hz-modes { display: flex; align-items: center; gap: 6px; font-size: 11.5px; color: var(--muted); }
+.hz-modes span { margin-right: 2px; }
+.hz-modes button { flex: 1 1 0; padding: 4px 6px; border-radius: 99px; font-weight: 700; color: var(--primary);
+  background: var(--surface); border: 1.2px solid var(--gold); }
+.hz-modes button.on { background: var(--primary); color: #fff; border-color: var(--primary); }
+body.fs .reader-tools { display: none !important; }
+.reader-tools .vt { font-size: 10.8px; gap: 4px; padding: 4px 5px 4px 3px; flex: 1 1 auto; overflow: visible; border: 1px solid var(--line); }
+.vt .vi { color: #fff; }
+.vt .vi svg { stroke: #fff; }
+.vt .vi i { color: #fff; }
+.reader-tools .vt.on { background: var(--gold-soft); border-color: var(--gold-2); color: var(--primary); }
+
+/* hifz, word / line at a time: the words keep exactly the ayah's own layout (plain inline spans), so the
+   signs over the letters stay where they are; a hidden word is drawn as a blur of its own shadow.
+   The ayah being recited stays hidden too; a lone waqf sign waits for the word before it, the ayah-end
+   sign for the last word. */
+body.hifz .ayah.playing:not(.reveal) .ar-text:not(.hz-split) { filter: blur(9px); }
+body.hifz .ayah .ar-text.hz-split { filter: none; }
+body.hifz .ar-text.hz-split .hw { display: inline; transition: color .25s, text-shadow .25s; }
+body.hifz .ayah:not(.reveal) .ar-text.hz-split .hw:not(.shown) { color: transparent; text-shadow: 0 0 10px var(--ink); }
+body.hifz .ayah:not(.reveal) .ar-text.hz-split .hw.mk:not(.shown) { visibility: hidden; }
+body.hifz .ayah:not(.reveal) .ar-text.hz-split .aya-end { filter: blur(9px); }
+
+/* ruku: the ع of a printed Mushaf after the last ayah of each ruku */
+.ruku-mark { display: flex; align-items: center; justify-content: center; gap: 12px; margin: -2px 2px 14px; color: var(--primary); }
+.ruku-mark .rk-l, .ruku-mark .rk-r { flex: 1; display: flex; flex-direction: column; font-size: 12px; font-weight: 700; line-height: 1.25; }
+.ruku-mark .rk-l { align-items: flex-end; text-align: right; }
+.ruku-mark small { font-size: 10.5px; font-weight: 500; color: var(--muted); }
+.ruku-mark .rk-ain { width: 46px; height: 46px; flex: none; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: var(--primary); color: #E9C46A; box-shadow: 0 0 0 2px var(--gold-2), 0 0 0 4px var(--bg), 0 0 0 5px var(--gold-2); }
+.ruku-mark .rk-ain b { font-family: var(--ar-font); font-size: 20px; line-height: 1; font-weight: 400; margin-top: -2px; }
+.ruku-mark .rk-ain i { font-style: normal; font-size: 10px; font-weight: 700; color: #fff; line-height: 1; margin-top: 1px; }
+body.fs .ruku-mark { display: none !important; }
+.ruku-mark { margin: 15px 2px 10px; }
+.ruku-mark .rk-c { display: flex; flex-direction: column; align-items: center; gap: 12px; flex: none; }
+.ruku-mark .rk-c > i { font-style: normal; font-size: 10.5px; font-weight: 700; color: var(--gold); line-height: 1; }
+.ruku-mark .rk-ain b { font-size: 22px; line-height: 46px; margin: 0; }
+
+/* ---------- v6.8: the player is one capsule that opens out of its play button and folds back into it ---------- */
+@property --p { syntax: '<percentage>'; inherits: true; initial-value: 0%; }
+.player { padding: 6px 6px 6px 7px; left: 12px; right: 12px; border-radius: 99px; background: none; box-shadow: none;
+  filter: drop-shadow(0 8px 14px rgba(0,0,0,.26)); }
+.player::before { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 99px;
+  background: linear-gradient(135deg, var(--hero-1), var(--primary-2));
+  clip-path: inset(0 0 0 0 round 99px); transition: clip-path .6s cubic-bezier(.65,0,.25,1); }
+.player .pl-row { gap: 1px; }
+.player .pl-row > :not(.pl-ring) { transition: opacity .35s ease .25s, transform .45s cubic-bezier(.3,1.3,.5,1) .2s; }
+.player .pl-btn { width: 31px; height: 31px; }
+.player .pl-btn svg { width: 17px; height: 17px; }
+.player .pl-info { padding-left: 7px; text-align: left; }
+.player .pl-info .t { font-size: 12.5px; }
+.player .pl-info .d { font-size: 10.5px; color: #F0D58C; opacity: .95; }
+.player .pl-speed { width: auto; height: 23px; padding: 0 5px; font-size: 10.5px; margin: 0 2px; }
+.pl-ring { width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; flex: none; position: relative;
+  background: conic-gradient(#E9C46A var(--p), rgba(255,255,255,.16) 0); transition: --p .3s linear; }
+.player .pl-main { width: 43px; height: 43px; box-shadow: 0 0 0 2px var(--hero-1); }
+.player .pl-main svg { width: 20px; height: 20px; }
+.pl-main > span { display: grid; place-items: center; }
+.pl-main .fx { display: none; }
+/* folded: only the round play button stays */
+.player.mini { pointer-events: none; }
+.player.mini::before { clip-path: inset(0 0 0 calc(100% - 62px) round 99px); transition-duration: .55s; }
+.player.mini .pl-row > :not(.pl-ring) { opacity: 0; transform: translateX(26px) scale(.6); transition: opacity .2s ease, transform .3s ease; }
+.player.mini .pl-ring { pointer-events: auto; }
+.player.pop .pl-ring { animation: ringPop .45s cubic-bezier(.3,1.6,.5,1); }
+.player.mini.on-air .pl-main .ic { display: none; }
+.player.mini.on-air .pl-main .fx { display: flex; align-items: center; gap: 3px; height: 17px; }
+.pl-main .fx i { display: block; width: 3.5px; height: 100%; border-radius: 3px; background: #2D2005; transform: scaleY(.35); animation: fabEq 1s ease-in-out infinite; }
+.pl-main .fx i:nth-child(2) { animation-delay: -.35s; animation-duration: .8s; }
+.pl-main .fx i:nth-child(3) { animation-delay: -.6s; animation-duration: 1.15s; }
+.pl-main .fx i:nth-child(4) { animation-delay: -.15s; animation-duration: .9s; }
+.player.mini.on-air .pl-ring::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; border: 2px solid #E9C46A; animation: fabHalo 2s ease-out infinite; pointer-events: none; }
+@keyframes fabEq { 0%, 100% { transform: scaleY(.3); } 50% { transform: scaleY(1); } }
+@keyframes fabHalo { 0% { transform: scale(1); opacity: .7; } 100% { transform: scale(1.4); opacity: 0; } }
+@keyframes ringPop { 0% { transform: scale(.2); opacity: 0; } 100% { transform: none; opacity: 1; } }
+body.has-player #view { padding-bottom: calc(136px + var(--safe-b)); }
+body.no-tabs.has-player #view { padding-bottom: calc(80px + var(--safe-b)); }
+body.has-player .as-panel { bottom: calc(88px + var(--safe-b)); }
+body.has-player #juzBar { bottom: calc(146px + var(--safe-b)); }
+body.no-tabs.has-player #juzBar { bottom: calc(88px + var(--safe-b)); }.player::after { content: ""; position: absolute; inset: 0; z-index: -1; border-radius: 99px; border: 1px solid rgba(233,196,106,.85); pointer-events: none;
+  clip-path: inset(0 0 0 0 round 99px); transition: clip-path .6s cubic-bezier(.65,0,.25,1), opacity .3s ease .3s; }
+.player.mini::after { clip-path: inset(0 0 0 calc(100% - 62px) round 99px); opacity: 0; transition: clip-path .55s cubic-bezier(.65,0,.25,1), opacity .2s ease; }/* the play button sits at the right end, and the capsule opens out of it to the left */
+.player .pl-ring { order: 9; margin-left: 3px; }
+.player #plClose { order: -1; }.player { transition: transform .55s cubic-bezier(.65,0,.25,1); }
+.player.mini { transform: translateX(-16px); }.player { left: 24px; right: 24px; bottom: calc(86px + var(--safe-b)); }
+body.no-tabs .player { bottom: calc(34px + var(--safe-b)); }body.no-tabs.has-player #view { padding-bottom: calc(108px + var(--safe-b)); }
+
+/* ---------- v6.9: a gold shine slides across page, sipara and ruku marks as they come on screen ---------- */
+.page-mark span, .juz-mark, .rk-ain { position: relative; overflow: hidden; }
+.page-mark span::before, .juz-mark::before, .rk-ain::before { content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: linear-gradient(105deg, transparent 38%, rgba(255,243,196,.55) 50%, transparent 62%) no-repeat;
+  background-size: 260% 100%; background-position: 160% 0; opacity: 0; }
+.glint::before { animation: markShine 2.4s ease-in-out 3; }
+@keyframes markShine { 0% { background-position: 160% 0; opacity: 1; } 65% { background-position: -60% 0; opacity: 1; } 66%, 100% { background-position: -60% 0; opacity: 0; } }/* while it plays, gold lights run along the capsule's top and bottom edges, in opposite directions */
+.pl-cm { position: absolute; top: -1px; left: 10%; width: 60px; height: 3px; filter: drop-shadow(0 0 3px #F6E2A6); border-radius: 3px; pointer-events: none; opacity: 0;
+  background: linear-gradient(90deg, transparent, #E9C46A 55%, #fff); }
+.pl-cm.bt { top: auto; bottom: -1px; background: linear-gradient(-90deg, transparent, #E9C46A 55%, #fff); }
+.player.on-air:not(.mini) .pl-cm { animation: plCm 2.6s linear infinite; }
+.player.on-air:not(.mini) .pl-cm.bt { animation-name: plCm2; }
+@keyframes plCm { 0% { left: 8%; opacity: 0; } 10%, 88% { opacity: 1; } 100% { left: calc(92% - 60px); opacity: 0; } }
+@keyframes plCm2 { 0% { left: calc(92% - 60px); opacity: 0; } 10%, 88% { opacity: 1; } 100% { left: 8%; opacity: 0; } }/* the "Sipara N starts here" banner is a capsule too */
+.juz-mark { border-radius: 99px; padding: 7px 24px 7px 7px; }.juz-mark { justify-content: center; padding: 7px 18px; }
+.juz-mark div { flex: none; align-items: center; text-align: center; }
+.juz-mark bdi { text-align: center; }.juz-mark { margin-left: 10px; margin-right: 10px; }
+.juz-mark { justify-content: flex-start; padding: 7px 18px 7px 12px; gap: 14px; }
+.juz-mark div { align-items: flex-start; text-align: left; }
+.juz-mark bdi { text-align: left; }
+.juz-mark .jm-n { width: 46px; height: 46px; font-size: 19px; }.juz-mark .jm-n { width: 52px; height: 52px; font-size: 19px; background: url(sipara-box.png) center / contain no-repeat; clip-path: none; }
+/* ayah-end number: dark green on a light gold disc inside the star, so it reads clearly */
+.aya-end { width: 1.8em; height: 1.8em; font-size: .66em; color: #0A4D44; }
+.aya-end::before { inset: -.14em;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M20 2l5 7.9 8.7-2.6-1.6 9L40 20l-7.9 3.7 1.6 9-8.7-2.6L20 38l-5-7.9-8.7 2.6 1.6-9L0 20l7.9-3.7-1.6-9 8.7 2.6z' fill='%23FBF3DD' stroke='%23B8892B' stroke-width='1.6'/%3E%3Ccircle cx='20' cy='20' r='11.5' fill='%23F3E2B3' stroke='%23B8892B' stroke-width='1.2'/%3E%3C/svg%3E") center/contain no-repeat; }
+.aya-end b { font-size: 1.12em; font-weight: 700; letter-spacing: -.02em; }.aya-end b { font-size: 1.24em; }
+/* ayah-end: the number between the two gold brackets of "aayat end.png"; the gap grows with the number's digits */
+.aya-end { display: inline-flex; align-items: center; width: auto; height: auto; direction: ltr; gap: .1em; margin: 0 .25em; vertical-align: -.35em; color: #0A4D44; }
+.aya-end::before, .aya-end::after { content: ""; position: static; inset: auto; flex: none; width: .93em; height: 1.9em;
+  background: url(ae-l.png) center / contain no-repeat; }
+.aya-end::after { background-image: url(ae-r.png); }
+.aya-end b { font-size: 1.3em; line-height: 1; padding: 0 .05em; }
+:root[data-dark="1"] .aya-end { color: #F0D58C; }.aya-end { gap: .14em; vertical-align: -.45em; }
+.aya-end::before, .aya-end::after { width: 1.08em; height: 2.2em; }
+.aya-end b { font-size: 1.75em; font-weight: 700; }.aya-end b { font-size: 2.1em; }
+.aya-end b { transform: translateY(-.14em); }
+.aya-end::before, .aya-end::after { width: .9em; height: 1.85em; filter: brightness(.82) saturate(1.2); }
+.aya-end { vertical-align: -.35em; }
+/* a bookmarked ayah is coloured like the one being recited */
+.ayah.bmk { background: var(--playing); border-color: var(--playing-line); box-shadow: 0 0 0 3px color-mix(in srgb, var(--playing-line) 35%, transparent), var(--shadow); }
+body.fs .ayah.bmk { border-radius: 12px; box-shadow: none; }
+/* the ayah's play button is a little bigger */
+.ayah-top .mini[data-act="play"] { width: 42px; height: 42px; }
+.ayah-top .mini[data-act="play"] svg { width: 27px; height: 27px; }.ayah-top .mini[data-act="play"] { width: 40px; height: 40px; }
+.ayah-top .mini[data-act="play"] svg { width: 25px; height: 25px; }
+/* the ayah's play button: a green pill with a word on it; it shines when the reader stays on that ayah */
+.ayah-top .mini[data-act="play"] { width: auto; height: 32px; border-radius: 99px; display: flex; align-items: center; gap: 5px; padding: 0 13px 0 9px; margin-right: 6px;
+  background: var(--primary); color: #F6E2A6; font-size: 13px; font-weight: 700; position: relative; overflow: hidden; }
+.ayah-top .mini[data-act="play"] svg { width: 18px; height: 18px; }
+.ayah-top .mini[data-act="play"]:active { background: var(--primary); transform: scale(.96); }
+.ayah-top .mini[data-act="play"]::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+  background: linear-gradient(105deg, transparent 35%, rgba(255,246,210,.75) 50%, transparent 65%) no-repeat; background-size: 260% 100%; background-position: 160% 0; }
+.ayah-top .mini[data-act="play"].shine::after { animation: markShine 2.4s ease-in-out 3; }/* bookmark and menu: round, the play pill's height, in the colours of the Tafseer / Word by word chips */
+.ayah-top .mini[data-act="bm"], .ayah-top .mini[data-act="more"] { width: 32px; height: 32px; margin-left: 6px;
+  background: var(--surface-2); border: 1px solid var(--line); color: var(--accent); }
+.ayah-top .mini[data-act="bm"] svg, .ayah-top .mini[data-act="more"] svg { width: 16px; height: 16px; }.ayah-top .mini[data-act="play"] { margin-right: 0; background: var(--accent); }
+.ayah-top .mini[data-act="play"]:active { background: var(--accent); }
+
+/* ---------- v7.2: language choice (first open + Settings) ---------- */
+.lang-grid { display: grid; grid-template-columns: 1fr; gap: 10px; padding: 12px; }
+.lang-card { display: flex; flex-direction: column; align-items: flex-start; gap: 3px; text-align: left; padding: 14px 16px; border-radius: 16px; border: 1.5px solid var(--line); background: var(--surface-2); color: var(--ink); font: inherit; cursor: pointer; }
+.lang-card.on { border-color: var(--gold); background: var(--gold-soft); box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold-2) 30%, transparent); }
+:root[data-dark="1"] .lang-card.on { background: color-mix(in srgb, var(--gold) 18%, var(--surface-2)); }
+.lang-card .lc-ar { font-family: var(--ar-font), "QalamMajeed"; font-size: 24px; color: var(--ink-ar); align-self: flex-end; direction: rtl; line-height: 1.6; }
+.lang-card .lc-pv { font-size: 15.5px; line-height: 1.55; color: var(--accent); margin-bottom: 6px; }
+.lang-card .lc-pv.gu { font-family: "NotoGuj", sans-serif; }
+.lang-card .lc-pv.en { font-family: system-ui, "Roboto", sans-serif; }
+.lang-card b { font-size: 16px; }
+.lang-card small { font-size: 12.5px; color: var(--muted); }
+.sheet .lang-grid { padding: 6px 0 4px; }
+
+/* ---------- v7.2: report a problem ---------- */
+.rep-where { display: inline-flex; align-items: center; gap: 6px; margin: 2px 0 10px; padding: 5px 12px; border-radius: 99px; background: var(--gold-soft); color: var(--primary); font-size: 13.5px; font-weight: 600; }
+.rep-where svg { width: 16px; height: 16px; }
+.rep-tx { display: block; width: 100%; box-sizing: border-box; min-height: 110px; padding: 12px 14px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface-2); color: var(--ink); font: 15px/1.6 var(--ui-font); resize: vertical; }
+.rep-tx:focus { outline: none; border-color: var(--accent); }
+.rep-pics { display: flex; flex-wrap: wrap; gap: 10px; margin: 12px 0 2px; }
+.rep-pics:empty { display: none; }
+.rep-pic { position: relative; width: 74px; height: 130px; border-radius: 10px; overflow: hidden; border: 1px solid var(--line); background: var(--surface-2); }
+.rep-pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.rep-pic button { position: absolute; top: 4px; right: 4px; width: 24px; height: 24px; border-radius: 50%; border: 0; padding: 4px; background: rgba(0, 0, 0, .6); color: #fff; display: grid; place-items: center; }
+.rep-pic button svg { width: 14px; height: 14px; }
+.rep-btns { display: flex; gap: 10px; margin-top: 14px; }
+.rep-btns .btn { flex: 1; justify-content: center; white-space: nowrap; }
+.rep-btns #repPick { flex: none; padding-inline: 14px; } /* one line, narrower than Send */
+.rep-ph-l { display: block; margin: 14px 0 6px; font-size: 14px; font-weight: 600; color: var(--ink); }
+.rep-ph-l b { color: #c0392b; }
+.rep-ph { display: block; width: 100%; box-sizing: border-box; padding: 11px 14px; border-radius: 14px; border: 1.5px solid var(--line); background: var(--surface-2); color: var(--ink); font: 16px/1.4 var(--ui-font); letter-spacing: .5px; }
+.rep-ph:focus { outline: none; border-color: var(--accent); }
+/* Send stays grey until the mobile number is written */
+.rep-btns .btn:disabled { opacity: .4; filter: grayscale(1); box-shadow: none; pointer-events: none; }
+/* v7.2: the two language cards side by side, each with a round select mark */
+.lang-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+.lang-card { position: relative; padding: 38px 12px 12px; }
+.lang-card .lc-ar { font-size: 20px; align-self: center; }
+.lang-card .lc-pv { font-size: 13px; line-height: 1.5; }
+.lang-card b { font-size: 14.5px; }
+.lang-card small { font-size: 11.5px; line-height: 1.4; }
+.lang-card .lc-radio { position: absolute; top: 10px; left: 10px; width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--line); background: var(--surface); display: grid; place-items: center; box-sizing: border-box; }
+.lang-card .lc-radio svg { width: 13px; height: 13px; opacity: 0; stroke: #fff; stroke-width: 3; }
+.lang-card.on .lc-radio { border-color: var(--accent); background: var(--accent); }
+.lang-card.on .lc-radio svg { opacity: 1; }
+.h-oth { opacity: .8; font-size: .92em; }
+
+/* the language boxes hold only the select mark and the option's name */
+.lang-card { flex-direction: row; align-items: center; justify-content: center; gap: 8px; padding: 14px 8px; }
+.lang-card .lc-radio { position: static; flex: none; }
+.lang-card b { font-size: 14px; white-space: nowrap; }.lang-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; padding: 10px; }
+.lang-card { min-width: 0; gap: 6px; padding: 14px 6px; }
+.lang-card .lc-radio { width: 20px; height: 20px; }
+.lang-card b { font-size: 13px; white-space: normal; min-width: 0; }
+/* Settings: the Speed and Repeat chips each stay on one line */
+.s-card .chips[data-chips="speed"], .s-card .chips[data-chips="rep"] { flex-wrap: nowrap; gap: 4px; }
+.s-card .chips[data-chips="speed"] .chip, .s-card .chips[data-chips="rep"] .chip { flex: 1 1 0; min-width: 0; padding: 7px 0; font-size: 12.5px; white-space: nowrap; }
+.bk-list { margin-top: 10px; }
+
+/* Settings: the app's card at the end — logo beside the name, What's New as its own line */
+.about { text-align: left; padding: 14px 14px 4px; }
+.ab-top { display: flex; align-items: center; gap: 14px; }
+.about .logo { flex: none; width: 72px; height: 72px; border-radius: 20px; }
+.ab-t { min-width: 0; }
+.about .nm { font-size: 18px; line-height: 1.25; margin-top: 0; }
+.about .d { line-height: 1.4; margin-top: 2px; }
+.ab-v { display: inline-block; margin-top: 6px; padding: 2px 10px; border-radius: 99px; background: var(--gold-soft); color: var(--primary); font-size: 12px; font-weight: 600; }
+:root[data-dark="1"] .ab-v { color: var(--gold-2); background: var(--surface-2); }
+.ab-new { display: flex; align-items: center; gap: 10px; width: 100%; margin-top: 12px; padding: 13px 2px; border: 0; border-top: 1px solid var(--line); background: none; color: var(--accent); font: inherit; font-size: 14.5px; font-weight: 600; text-align: left; }
+.ab-new span { flex: 1; min-width: 0; }
+.ab-new svg { flex: none; width: 18px; height: 18px; }
+.ab-new svg:first-child { fill: var(--gold); stroke: none; }
